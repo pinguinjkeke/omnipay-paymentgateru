@@ -1,0 +1,37 @@
+{
+  "name": "pinguinjkeke/omnipay-paymentgateru",
+  "version": "0.1.0",
+  "type": "library",
+  "description": "Paymentgate.ru support for Omnipay payment processing library",
+  "keywords": [
+    "alphabank",
+    "paymentgateru",
+    "paymentgate",
+    "gateway",
+    "merchant",
+    "omnipay",
+    "pay",
+    "payment",
+    "purchase",
+    "soap"
+  ],
+  "homepage": "https://github.com/pinguinjkeke/omnipay-paymentgateru",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Avakov",
+      "email": "yaavakov@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\PaymentgateRu\\": "src/"
+    }
+  },
+  "require": {
+    "omnipay/common": "^2.3"
+  },
+  "require-dev": {
+    "omnipay/tests": "^2.1"
+  }
+}

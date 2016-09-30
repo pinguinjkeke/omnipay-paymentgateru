@@ -105,4 +105,8 @@ abstract class AbstractRequestTest extends TestCase
     }
 
     abstract public function testData();
+    
+    abstract public function testSendSuccess();
+    
+    abstract public function testSendFailure();
 }

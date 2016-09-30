@@ -71,21 +71,28 @@ class AuthorizeRequestTest extends AbstractRequestTest
     {
         $this->assertEquals($this->getRequestParameters(), $this->request->getData());
 
-        $this->request->setCurrency(810);
+        $this->request
+            ->setLanguage('ru')
+            ->setPageView('MOBILE')
+            ->setSessionTimeoutSecs(1440)
+            ->setBindingId('helloWorld')
+            ->setExpirationDate('2018-12-12T12:04:12')
+            ->setFailUrl('http://test.com/fail')
+            ->setClientId('testClientId')
+            ->setMerchantLogin('testMerchantLogin')
+            ->setCurrency(810);
+
         $data = $this->request->getData();
+
         $this->assertEquals($data['currency'], 810);
-
-        $this->request->setLanguage('ru');
-        $data = $this->request->getData();
         $this->assertEquals($data['language'], 'ru');
-
-        $this->request->setPageView('MOBILE');
-        $data = $this->request->getData();
         $this->assertEquals($data['pageView'], 'MOBILE');
-
-        $this->request->setSessionTimeoutSecs(1440);
-        $data = $this->request->getData();
         $this->assertEquals($data['sessionTimeoutSecs'], 1440);
+        $this->assertEquals($data['bindingId'], 'helloWorld');
+        $this->assertEquals($data['expirationDate'], '2018-12-12T12:04:12');
+        $this->assertEquals($data['failUrl'], 'http://test.com/fail');
+        $this->assertEquals($data['clientId'], 'testClientId');
+        $this->assertEquals($data['merchantLogin'], 'testMerchantLogin');
     }
 
     public function testSendSuccess()

@@ -18,7 +18,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set language (ISO 639-1)
      *
      * @param string $language
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
     public function setLanguage($language)
@@ -40,7 +40,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Defaults are DESKTOP or MOBILE if you implemented it in your payment page template.
      *
      * @param string $pageView
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
     public function setPageView($pageView)
@@ -62,12 +62,122 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set session timeout in seconds
      *
      * @param int $sessionTimeoutSecs
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
     public function setSessionTimeoutSecs($sessionTimeoutSecs)
     {
         return $this->setParameter('sessionTimeoutSecs', $sessionTimeoutSecs);
+    }
+
+    /**
+     * Get id of previously created binding. Use only if you work with bindings.
+     *
+     * @return string
+     */
+    public function getBindingId()
+    {
+        return $this->getParameter('bindingId');
+    }
+
+    /**
+     * Set id of previously created binding. Use only if you work with bindings.
+     *
+     * @param string $bindingId
+     * @return $this
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setBindingId($bindingId)
+    {
+        return $this->setParameter('bindingId', $bindingId);
+    }
+
+    /**
+     * Get order expiration date in yyyy-MM-ddTHH:mm:ss
+     *
+     * @return string
+     */
+    public function getExpirationDate()
+    {
+        return $this->getParameter('expirationDate');
+    }
+
+    /**
+     * Set order expiration date in yyyy-MM-ddTHH:mm:ss
+     *
+     * @param string $expirationDate
+     * @return $this
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setExpirationDate($expirationDate)
+    {
+        return $this->setParameter('expirationDate', $expirationDate);
+    }
+
+    /**
+     * Get fail payment url
+     *
+     * @return string
+     */
+    public function getFailUrl()
+    {
+        return $this->getParameter('failUrl');
+    }
+
+    /**
+     * Set fail payment url
+     *
+     * @param string $failUrl
+     * @return $this
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setFailUrl($failUrl)
+    {
+        return $this->setParameter('failUrl', $failUrl);
+    }
+
+    /**
+     * Get client id for bindings
+     *
+     * @return string
+     */
+    public function getClientId()
+    {
+        return $this->getParameter('clientId');
+    }
+
+    /**
+     * Set client id for bindings
+     *
+     * @param string $clientId
+     * @return $this
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setClientId($clientId)
+    {
+        return $this->setParameter('clientId', $clientId);
+    }
+
+    /**
+     * Additional merchant login if you using one.
+     *
+     * @return string
+     */
+    public function getMerchantLogin()
+    {
+        return $this->getParameter('merchantLogin');
+    }
+
+    /**
+     * Additional merchant login if you using one.
+     *
+     * @param string $merchantLogin
+     * @return $this
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setMerchantLogin($merchantLogin)
+    {
+        return $this->setParameter('merchantLogin', $merchantLogin);
     }
 
     /**
@@ -84,7 +194,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set two step order authentication
      *
      * @param boolean $twoStage
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
     public function setTwoStep($twoStage)
@@ -140,20 +250,17 @@ class AuthorizeRequest extends AbstractCurlRequest
             'returnUrl' => $this->getReturnUrl()
         );
 
-        if ($currency = $this->getCurrency()) {
-            $data['currency'] = $this->getCurrency();
-        }
+        $extraParameters = array(
+            'currency', 'description', 'language', 'pageView', 'sessionTimeoutSecs',
+            'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin'
+        );
 
-        if ($language = $this->getLanguage()) {
-            $data['language'] = $language;
-        }
+        foreach ($extraParameters as $parameter) {
+            $getter = 'get' . ucfirst($parameter);
 
-        if ($pageView = $this->getPageView()) {
-            $data['pageView'] = $pageView;
-        }
-
-        if ($sessionTimeoutSecs = $this->getSessionTimeoutSecs()) {
-            $data['sessionTimeoutSecs'] = $sessionTimeoutSecs;
+            if (method_exists($this, $getter) && ($value = $this->{$getter}())) {
+                $data[$parameter] = $value;
+            }
         }
 
         return $data;

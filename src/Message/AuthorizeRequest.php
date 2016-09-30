@@ -5,6 +5,72 @@ namespace Omnipay\PaymentgateRu\Message;
 class AuthorizeRequest extends AbstractCurlRequest
 {
     /**
+     * Get language (ISO 639-1)
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+
+    /**
+     * Set language (ISO 639-1)
+     *
+     * @param string $language
+     * @return \Omnipay\Common\Message\AbstractRequest
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setLanguage($language)
+    {
+        return $this->setParameter('language', $language);
+    }
+
+    /**
+     * Get page view
+     *
+     * @return string
+     */
+    public function getPageView()
+    {
+        return $this->getParameter('pageView');
+    }
+
+    /**
+     * Defaults are DESKTOP or MOBILE if you implemented it in your payment page template.
+     *
+     * @param string $pageView
+     * @return \Omnipay\Common\Message\AbstractRequest
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setPageView($pageView)
+    {
+        return $this->setParameter('pageView', $pageView);
+    }
+
+    /**
+     * Get session timeout in seconds
+     *
+     * @return int
+     */
+    public function getSessionTimeoutSecs()
+    {
+        return $this->getParameter('sessionTimeoutSecs');
+    }
+
+    /**
+     * Set session timeout in seconds
+     *
+     * @param int $sessionTimeoutSecs
+     * @return \Omnipay\Common\Message\AbstractRequest
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setSessionTimeoutSecs($sessionTimeoutSecs)
+    {
+        return $this->setParameter('sessionTimeoutSecs', $sessionTimeoutSecs);
+    }
+
+    /**
      * Is order two stepped?
      *
      * @return boolean
@@ -48,11 +114,11 @@ class AuthorizeRequest extends AbstractCurlRequest
     }
 
     /**
-     * Response class name
+     * Response class name. Method will be ignored if class name passed to constructor third parameter
      *
      * @return string
      */
-    protected function getResponseClass()
+    public function getResponseClass()
     {
         return 'AuthorizeResponse';
     }
@@ -66,12 +132,30 @@ class AuthorizeRequest extends AbstractCurlRequest
      */
     public function getData()
     {
-        $this->validate();
+        $this->validate('orderNumber', 'amount', 'returnUrl');
         
-        return array(
+        $data = array(
             'orderNumber' => $this->getOrderNumber(),
             'amount' => $this->getAmount(),
             'returnUrl' => $this->getReturnUrl()
         );
+
+        if ($currency = $this->getCurrency()) {
+            $data['currency'] = $this->getCurrency();
+        }
+
+        if ($language = $this->getLanguage()) {
+            $data['language'] = $language;
+        }
+
+        if ($pageView = $this->getPageView()) {
+            $data['pageView'] = $pageView;
+        }
+
+        if ($sessionTimeoutSecs = $this->getSessionTimeoutSecs()) {
+            $data['sessionTimeoutSecs'] = $sessionTimeoutSecs;
+        }
+
+        return $data;
     }
 }

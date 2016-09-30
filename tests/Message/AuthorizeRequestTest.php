@@ -2,6 +2,12 @@
 
 namespace Omnipay\PaymentgateRu\Message;
 
+/**
+ * Class AuthorizeRequestTest
+ *
+ * @package Omnipay\PaymentgateRu\Message
+ * @property AuthorizeRequest $request
+ */
 class AuthorizeRequestTest extends AbstractRequestTest
 {
     /**
@@ -44,9 +50,42 @@ class AuthorizeRequestTest extends AbstractRequestTest
         );
     }
 
+    public function testGettersAndSetters()
+    {
+        $this->assertSame($this->request->setLanguage('ru'), $this->request);
+        $this->assertEquals($this->request->getLanguage(), 'ru');
+
+        $this->assertSame($this->request->setPageView('MOBILE'), $this->request);
+        $this->assertEquals($this->request->getPageView(), 'MOBILE');
+
+        $this->assertSame($this->request->setSessionTimeoutSecs(1400), $this->request);
+        $this->assertEquals($this->request->getSessionTimeoutSecs(), 1400);
+
+        $this->assertSame($this->request->setTwoStep(true), $this->request);
+        $this->assertTrue($this->request->getTwoStep());
+        $this->request->setTwoStep(false);
+        $this->assertFalse($this->request->getTwoStep());
+    }
+
     public function testData()
     {
         $this->assertEquals($this->getRequestParameters(), $this->request->getData());
+
+        $this->request->setCurrency(810);
+        $data = $this->request->getData();
+        $this->assertEquals($data['currency'], 810);
+
+        $this->request->setLanguage('ru');
+        $data = $this->request->getData();
+        $this->assertEquals($data['language'], 'ru');
+
+        $this->request->setPageView('MOBILE');
+        $data = $this->request->getData();
+        $this->assertEquals($data['pageView'], 'MOBILE');
+
+        $this->request->setSessionTimeoutSecs(1440);
+        $data = $this->request->getData();
+        $this->assertEquals($data['sessionTimeoutSecs'], 1440);
     }
 
     public function testSendSuccess()

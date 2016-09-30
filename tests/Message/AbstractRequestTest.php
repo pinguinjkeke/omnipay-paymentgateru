@@ -83,7 +83,7 @@ abstract class AbstractRequestTest extends TestCase
         $responseClass = 'UnexistentClassName';
 
         try {
-            $request = new $requestClass($this->getHttpClient(), $this->getHttpRequest(), $responseClass);
+            new $requestClass($this->getHttpClient(), $this->getHttpRequest(), $responseClass);
         } catch (RuntimeException $e) {
             $this->assertEquals(
                 $e->getMessage(),

@@ -158,13 +158,34 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Is gateway supports deposit?
+     *
+     * @return boolean
+     */
+    public function supportsDeposit()
+    {
+        return method_exists($this, 'deposit');
+    }
+
+    /**
      * Authorize request
      * 
      * @param array $options
-     * @return \Omnipay\PaymentgateRu\Message\AuthorizeRequest
+     * @return Message\AuthorizeRequest
      */
     public function authorize(array $options = array())
     {
         return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\AuthorizeRequest', $options);
+    }
+
+    /**
+     * Deposit request
+     *
+     * @param array $options
+     * @return Message\DepositRequest
+     */
+    public function deposit(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\DepositRequest', $options);
     }
 }

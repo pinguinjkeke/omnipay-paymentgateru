@@ -50,4 +50,11 @@ class GatewayTest extends GatewayTestCase
         $this->assertTrue(method_exists($this->gateway, 'authorize'));
         $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\AuthorizeRequest', $this->gateway->authorize());
     }
+
+    public function testDeposit()
+    {
+        $this->assertTrue($this->gateway->supportsDeposit());
+        $this->assertTrue(method_exists($this->gateway, 'deposit'));
+        $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\DepositRequest', $this->gateway->deposit());
+    }
 }

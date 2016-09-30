@@ -51,6 +51,17 @@ abstract class AbstractCurlRequest extends AbstractRequest
     }
 
     /**
+     * Validates and returns the formatted amount.
+     * Paymentgate requires to send amount in kopeck instead of just rubles
+     *
+     * @return int
+     */
+    public function getAmount()
+    {
+        return (int) $this->getParameter('amount');
+    }
+
+    /**
      * Get gateway user name
      *
      * @return string
@@ -161,6 +172,8 @@ abstract class AbstractCurlRequest extends AbstractRequest
             ->set(CURLOPT_SSLVERSION, 6);
 
         $httpResponse = $httpRequest->send();
+        echo '<pre>' . print_r($httpResponse->getRawHeaders(), true) . '</pre>';
+        echo '<pre>' . print_r($httpResponse->getBody(true), true) . '</pre>';
 
         return new $this->responseClass($this, $httpResponse->getBody(true));
     }

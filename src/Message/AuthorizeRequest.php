@@ -203,17 +203,6 @@ class AuthorizeRequest extends AbstractCurlRequest
     }
 
     /**
-     * Validates and returns the formatted amount.
-     * Paymentgate requires to send amount in kopeck instead of just rubles
-     *
-     * @return int
-     */
-    public function getAmount()
-    {
-        return (int) $this->getParameter('amount');
-    }
-
-    /**
      * Method name from bank API
      *
      * @return string

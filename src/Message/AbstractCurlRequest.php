@@ -25,24 +25,25 @@ abstract class AbstractCurlRequest extends AbstractRequest
     abstract protected function getMethod();
 
     /**
-     * Response class name
+     * Response class name. Method will be ignored if class name passed to constructor third parameter
      *
      * @return string
      */
-    abstract protected function getResponseClass();
+    abstract public function getResponseClass();
 
     /**
      * Create a new Request
      *
      * @param ClientInterface $httpClient A Guzzle client to make API calls with
      * @param HttpRequest $httpRequest A Symfony HTTP request object
+     * @param null|string Response class name (overrides getResponseClass method). Created for test purposes
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest)
+    public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest, $responseClass = null)
     {
         parent::__construct($httpClient, $httpRequest);
 
-        $this->responseClass = '\\Omnipay\\PaymentgateRu\\Message\\' . $this->getResponseClass();
+        $this->responseClass = '\\Omnipay\\PaymentgateRu\\Message\\' . ($responseClass ?: $this->getResponseClass());
 
         if (!class_exists($this->responseClass)) {
             throw new RuntimeException("Response class \"{$this->responseClass}\" not exists");

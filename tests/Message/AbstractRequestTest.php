@@ -68,12 +68,28 @@ abstract class AbstractRequestTest extends TestCase
      */
     public function setUp()
     {
-        $this->request = new AuthorizeRequest($this->getHttpClient(), $this->getHttpRequest());
+        $request = $this->getRequestClassName();
+        $this->request = new $request($this->getHttpClient(), $this->getHttpRequest());
         $this->userName = uniqid('login', true);
         $this->password = uniqid('password', true);
         $this->orderNumber = uniqid('test_order', true);
 
         $this->request->initialize($this->getRequestParameters());
+    }
+
+    public function testRequestShouldThrowRuntimeExceptionIfResponseClassNotExists()
+    {
+        $requestClass = $this->getRequestClassName();
+        $responseClass = 'UnexistentClassName';
+
+        try {
+            $request = new $requestClass($this->getHttpClient(), $this->getHttpRequest(), $responseClass);
+        } catch (RuntimeException $e) {
+            $this->assertEquals(
+                $e->getMessage(),
+                "Response class \"\\Omnipay\\PaymentgateRu\\Message\\{$responseClass}\" not exists"
+            );
+        }
     }
 
     public function testSendDataReturnsCorrectResponseClassInstance()

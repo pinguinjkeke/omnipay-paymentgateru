@@ -178,6 +178,16 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Does gateway supports status extended?
+     *
+     * @return boolean
+     */
+    public function supportsStatusExtended()
+    {
+        return method_exists($this, 'statusExtended');
+    }
+
+    /**
      * Authorize request
      * 
      * @param array $options
@@ -208,5 +218,16 @@ class Gateway extends AbstractGateway
     public function status(array $options = array())
     {
         return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\StatusRequest', $options);
+    }
+
+    /**
+     * Order status extended request
+     *
+     * @param array $options
+     * @return Message\StatusExtendedRequest
+     */
+    public function statusExtended(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\StatusExtendedRequest', $options);
     }
 }

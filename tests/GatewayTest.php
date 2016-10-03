@@ -64,4 +64,14 @@ class GatewayTest extends GatewayTestCase
         $this->assertTrue(method_exists($this->gateway, 'status'));
         $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\StatusRequest', $this->gateway->status());
     }
+
+    public function testStatusExtended()
+    {
+        $this->assertTrue($this->gateway->supportsStatusExtended());
+        $this->assertTrue(method_exists($this->gateway, 'statusExtended'));
+        $this->assertInstanceOf(
+            '\\Omnipay\\PaymentgateRu\\Message\\StatusExtendedRequest',
+            $this->gateway->statusExtended()
+        );
+    }
 }

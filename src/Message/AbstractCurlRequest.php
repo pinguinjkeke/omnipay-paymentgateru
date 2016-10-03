@@ -3,6 +3,7 @@
 namespace Omnipay\PaymentgateRu\Message;
 
 use Guzzle\Http\ClientInterface;
+use Guzzle\Http\Exception\ServerErrorResponseException;
 use Omnipay\Common\Exception\RuntimeException;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\Common\Message\ResponseInterface;
@@ -193,7 +194,12 @@ abstract class AbstractCurlRequest extends AbstractRequest
         $httpRequest->getCurlOptions()
             ->set(CURLOPT_SSLVERSION, 6);
 
-        $httpResponse = $httpRequest->send();
+        try {
+            $httpResponse = $httpRequest->send();
+        } catch (ServerErrorResponseException $e) {
+            return null;
+        }
+        
         echo '<pre>' . print_r($httpResponse->getRawHeaders(), true) . '</pre>';
         echo '<pre>' . print_r($httpResponse->getBody(true), true) . '</pre>';
 

@@ -27,28 +27,6 @@ class DepositRequest extends AbstractCurlRequest
     }
 
     /**
-     * Get language (ISO 639-1)
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->getParameter('language');
-    }
-
-    /**
-     * Set language (ISO 639-1)
-     *
-     * @param string $language
-     * @return $this
-     * @throws \Omnipay\Common\Exception\RuntimeException
-     */
-    public function setLanguage($language)
-    {
-        return $this->setParameter('language', $language);
-    }
-
-    /**
      * Method name from bank API
      *
      * @return string

@@ -15,18 +15,6 @@ class AuthorizeRequest extends AbstractCurlRequest
     }
 
     /**
-     * Set language (ISO 639-1)
-     *
-     * @param string $language
-     * @return $this
-     * @throws \Omnipay\Common\Exception\RuntimeException
-     */
-    public function setLanguage($language)
-    {
-        return $this->setParameter('language', $language);
-    }
-
-    /**
      * Get page view
      *
      * @return string

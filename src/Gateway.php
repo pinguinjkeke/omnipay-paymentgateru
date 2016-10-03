@@ -188,6 +188,16 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Does gateway supports reverse?
+     *
+     * @return boolean
+     */
+    public function supportsReverse()
+    {
+        return method_exists($this, 'reverse');
+    }
+
+    /**
      * Authorize request
      * 
      * @param array $options
@@ -229,5 +239,16 @@ class Gateway extends AbstractGateway
     public function statusExtended(array $options = array())
     {
         return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\StatusExtendedRequest', $options);
+    }
+
+    /**
+     * Reverse order
+     *
+     * @param array $options
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function reverse(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\ReverseRequest', $options);
     }
 }

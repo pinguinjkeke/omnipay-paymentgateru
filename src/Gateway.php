@@ -265,7 +265,7 @@ class Gateway extends AbstractGateway
      * Reverse order
      *
      * @param array $options
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return Message\ReverseRequest
      */
     public function reverse(array $options = array())
     {
@@ -276,7 +276,7 @@ class Gateway extends AbstractGateway
      * Refund sum from order
      *
      * @param array $options
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return Message\RefundRequest
      */
     public function refund(array $options = array())
     {
@@ -287,7 +287,7 @@ class Gateway extends AbstractGateway
      * Verify card 3DS enrollment
      * 
      * @param array $options
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return Message\VerifyEnrollmentRequest
      */
     public function verifyEnrollment(array $options = array())
     {
@@ -298,7 +298,7 @@ class Gateway extends AbstractGateway
      * Add order parameters
      * 
      * @param array $options
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return Message\AddParamsRequest
      */
     public function addParams(array $options = array())
     {

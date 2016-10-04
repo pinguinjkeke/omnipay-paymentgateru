@@ -1,8 +1,7 @@
 # Omnipay: PaymentgateRu
 
 **PaymentgateRu driver for the Omnipay PHP payment processing library**
-
-[![Build Status](https://api.travis-ci.org/pinguinjkeke/omnipay-paymentgate.svg)](https://travis-ci.org/pinguinjkeke/omnipay-paymentgateru)
+[![Build Status](https://api.travis-ci.org/pinguinjkeke/omnipay-paymentgateru.svg)](https://travis-ci.org/pinguinjkeke/omnipay-paymentgateru)
 [![Latest Stable Version](https://poser.pugx.org/pinguinjkeke/omnipay-paymentgateru/version.png)](https://packagist.org/packages/pinguinjkeke/omnipay-paymentgateru)
 [![Total Downloads](https://poser.pugx.org/pinguinjkeke/omnipay-paymentgateru/d/total.png)](https://packagist.org/packages/pinguinjkeke/omnipay-paymentgateru)
 

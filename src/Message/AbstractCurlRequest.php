@@ -197,13 +197,8 @@ abstract class AbstractCurlRequest extends AbstractRequest
         try {
             $httpResponse = $httpRequest->send();
         } catch (ServerErrorResponseException $e) {
-            echo $e->getMessage();
-
             return null;
         }
-        
-        echo '<pre>' . print_r($httpResponse->getRawHeaders(), true) . '</pre>';
-        echo '<pre>' . print_r($httpResponse->getBody(true), true) . '</pre>';
 
         return new $this->responseClass($this, $httpResponse->getBody(true));
     }

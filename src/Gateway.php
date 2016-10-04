@@ -5,7 +5,12 @@ namespace Omnipay\PaymentgateRu;
 use Omnipay\Common\AbstractGateway;
 
 /**
- * Class Gateway
+ * Class Gateway.
+ *
+ * Works with Paymentgate.ru gateway.
+ * Supports test mode.
+ * Implemented all methods from provided pdf instead of adding a card to SSL list
+ * and payment through external payment system
  *
  * @author Alexander Avakov (pinguinjkeke)
  * @company Meshgroup

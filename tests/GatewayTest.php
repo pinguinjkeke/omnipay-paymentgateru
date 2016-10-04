@@ -86,6 +86,16 @@ class GatewayTest extends GatewayTestCase
     {
         $this->assertTrue($this->gateway->supportsRefund());
         $this->assertTrue(method_exists($this->gateway, 'refund'));
-        $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\RefundRequest', $this->gateway->refund());
+        $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\RefundRequest', $this->gateway->refund());
+    }
+
+    public function testVerifyEnrollment()
+    {
+        $this->assertTrue($this->gateway->supportsVerifyEnrollment());
+        $this->assertTrue(method_exists($this->gateway, 'verifyEnrollment'));
+        $this->assertInstanceOf(
+            '\\Omnipay\\PaymentgateRu\\Message\\VerifyEnrollmentRequest',
+            $this->gateway->verifyEnrollment()
+        );
     }
 }

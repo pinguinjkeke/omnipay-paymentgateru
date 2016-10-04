@@ -197,6 +197,11 @@ class Gateway extends AbstractGateway
         return method_exists($this, 'reverse');
     }
 
+    public function supportsVerifyEnrollment()
+    {
+        return method_exists($this, 'verifyEnrollment');
+    }
+
     /**
      * Authorize request
      * 
@@ -261,5 +266,16 @@ class Gateway extends AbstractGateway
     public function refund(array $options = array())
     {
         return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\RefundRequest', $options);
+    }
+
+    /**
+     * Verify card 3DS enrollment
+     * 
+     * @param array $options
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function verifyEnrollment(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\VerifyEnrollmentRequest', $options);
     }
 }

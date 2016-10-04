@@ -228,6 +228,26 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Does gateway supports card binding?
+     * 
+     * @return boolean
+     */
+    public function supportsCardBind()
+    {
+        return method_exists($this, 'cardBind');
+    }
+
+    /**
+     * Does gateway supports card unbinding
+     * 
+     * @return boolean
+     */
+    public function supportsCardUnbind()
+    {
+        return method_exists($this, 'cardUnbind');
+    }
+
+    /**
      * Authorize request
      * 
      * @param array $options
@@ -335,5 +355,27 @@ class Gateway extends AbstractGateway
     public function purchase(array $options = array())
     {
         return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\PurchaseRequest', $options);
+    }
+
+    /**
+     * Bind card
+     * 
+     * @param array $options
+     * @return Message\CardBindRequest
+     */
+    public function cardBind(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\CardBindRequest', $options);
+    }
+
+    /**
+     * Unbind card
+     *
+     * @param array $options
+     * @return Message\CardUnbindRequest
+     */
+    public function cardUnbind(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\CardUnbindRequest', $options);
     }
 }

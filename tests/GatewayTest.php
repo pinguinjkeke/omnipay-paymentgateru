@@ -111,8 +111,22 @@ class GatewayTest extends GatewayTestCase
         $this->assertTrue($this->gateway->supportsGetLastOrders());
         $this->assertTrue(method_exists($this->gateway, 'getLastOrders'));
         $this->assertInstanceOf(
-            '\\Omnipay\\PaymentGateRu\\Message\\GetLastOrdersRequest',
+            '\\Omnipay\\PaymentgateRu\\Message\\GetLastOrdersRequest',
             $this->gateway->getLastOrders()
         );
+    }
+
+    public function testCardBind()
+    {
+        $this->assertTrue($this->gateway->supportsCardBind());
+        $this->assertTrue(method_exists($this->gateway, 'cardBind'));
+        $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\CardBindRequest', $this->gateway->cardBind());
+    }
+
+    public function testCardUnbind()
+    {
+        $this->assertTrue($this->gateway->supportsCardUnbind());
+        $this->assertTrue(method_exists($this->gateway, 'cardUnbind'));
+        $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\CardUnbindRequest', $this->gateway->cardUnbind());
     }
 }

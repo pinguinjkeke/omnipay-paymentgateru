@@ -197,6 +197,8 @@ abstract class AbstractCurlRequest extends AbstractRequest
         try {
             $httpResponse = $httpRequest->send();
         } catch (ServerErrorResponseException $e) {
+            echo $e->getMessage();
+
             return null;
         }
         

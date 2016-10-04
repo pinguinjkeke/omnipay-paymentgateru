@@ -105,4 +105,14 @@ class GatewayTest extends GatewayTestCase
         $this->assertTrue(method_exists($this->gateway, 'addParams'));
         $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\AddParamsRequest', $this->gateway->addParams());
     }
+
+    public function testGetLastOrders()
+    {
+        $this->assertTrue($this->gateway->supportsGetLastOrders());
+        $this->assertTrue(method_exists($this->gateway, 'getLastOrders'));
+        $this->assertInstanceOf(
+            '\\Omnipay\\PaymentGateRu\\Message\\GetLastOrdersRequest',
+            $this->gateway->getLastOrders()
+        );
+    }
 }

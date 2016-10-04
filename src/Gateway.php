@@ -218,6 +218,16 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Does gateway supports order list?
+     *
+     * @return boolean
+     */
+    public function supportsGetLastOrders()
+    {
+        return method_exists($this, 'getLastOrders');
+    }
+
+    /**
      * Authorize request
      * 
      * @param array $options
@@ -303,5 +313,16 @@ class Gateway extends AbstractGateway
     public function addParams(array $options = array())
     {
         return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\AddParamsRequest', $options);
+    }
+
+    /**
+     * Get last orders list
+     * 
+     * @param array $options
+     * @return Message\GetLastOrdersRequest
+     */
+    public function getLastOrders(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\GetLastOrdersRequest', $options);
     }
 }

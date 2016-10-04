@@ -197,6 +197,11 @@ class Gateway extends AbstractGateway
         return method_exists($this, 'reverse');
     }
 
+    /**
+     * Does gateway supports card 3ds enrollment verifying?
+     *
+     * @return boolean
+     */
     public function supportsVerifyEnrollment()
     {
         return method_exists($this, 'verifyEnrollment');

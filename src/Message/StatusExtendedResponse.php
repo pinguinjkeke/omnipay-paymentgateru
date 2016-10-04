@@ -10,7 +10,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * @param string $parameter
      * @return null|string
      */
-    protected function getMerchantOrderParam($parameter) 
+    protected function getMerchantOrderParam($parameter)
     {
         if (array_key_exists('merchantOrderParams', $this->data)) {
             foreach ($this->data['merchantOrderParams'] as $pair) {

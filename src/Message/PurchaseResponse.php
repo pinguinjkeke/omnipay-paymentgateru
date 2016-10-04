@@ -52,7 +52,7 @@ class PurchaseResponse extends AbstractCurlResponse
      */
     public function getRedirectUrl()
     {
-        return $this->getDataValueOrNull('redirect'); 
+        return $this->getDataValueOrNull('redirect');
     }
 
     /**

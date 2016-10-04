@@ -56,5 +56,4 @@ class AuthorizeResponse extends AbstractCurlResponse implements RedirectResponse
     {
         return array();
     }
-
 }

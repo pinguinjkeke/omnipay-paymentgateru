@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: nginx/1.8.1
+Date: Tue, 04 Oct 2016 13:37:29 GMT
+Content-Type: text/plain;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Set-Cookie: JSESSIONID=3x2xbv0ioq3r1axf9dwwwfy53;Path=/testpayment;Secure;HttpOnly
+Expires: Tue, 04 Oct 2016 13:37:28 GMT
+Cache-Control: no-cache
+Access-Control-Allow-Origin: https://playground.paymentgate.ru
+
+{
+  "redirect": "/ok/?orderId=470bee26-212b-46c9-9ee4-a38442990224",
+  "info": "Ваш платёж обработан, происходит переадресация...",
+  "errorCode": 0
+}

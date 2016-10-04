@@ -5,7 +5,7 @@ namespace Omnipay\PaymentgateRu\Message;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
 
-class AbstractCurlResponse extends AbstractResponse
+abstract class AbstractCurlResponse extends AbstractResponse
 {
     /**
      * Constructor

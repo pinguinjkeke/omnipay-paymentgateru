@@ -98,4 +98,11 @@ class GatewayTest extends GatewayTestCase
             $this->gateway->verifyEnrollment()
         );
     }
+
+    public function testAddParams()
+    {
+        $this->assertTrue($this->gateway->supportsAddParams());
+        $this->assertTrue(method_exists($this->gateway, 'addParams'));
+        $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\AddParamsRequest', $this->gateway->addParams());
+    }
 }

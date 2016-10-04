@@ -208,6 +208,16 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Does gateway supports order params adding?
+     * 
+     * @return boolean
+     */
+    public function supportsAddParams()
+    {
+        return method_exists($this, 'addParams');
+    }
+
+    /**
      * Authorize request
      * 
      * @param array $options
@@ -282,5 +292,16 @@ class Gateway extends AbstractGateway
     public function verifyEnrollment(array $options = array())
     {
         return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\VerifyEnrollmentRequest', $options);
+    }
+
+    /**
+     * Add order parameters
+     * 
+     * @param array $options
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function addParams(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\AddParamsRequest', $options);
     }
 }

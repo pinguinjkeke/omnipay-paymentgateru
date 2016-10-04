@@ -18,7 +18,7 @@ class VerifyEnrollmentRequest extends AbstractCurlRequest
      * Set pan (credit card number)
      *
      * @param string $pan
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
     public function setPan($pan)

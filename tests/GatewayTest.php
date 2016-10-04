@@ -139,4 +139,14 @@ class GatewayTest extends GatewayTestCase
             $this->gateway->cardExtendBinding()
         );
     }
+
+    public function testGetBindings()
+    {
+        $this->assertTrue($this->gateway->supportsGetClientBindings());
+        $this->assertTrue(method_exists($this->gateway, 'getClientBindings'));
+        $this->assertInstanceOf(
+            '\\Omnipay\\PaymentgateRu\\Message\\GetClientBindingsRequest',
+            $this->gateway->getClientBindings()
+        );
+    }
 }

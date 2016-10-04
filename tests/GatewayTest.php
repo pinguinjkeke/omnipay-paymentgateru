@@ -129,4 +129,14 @@ class GatewayTest extends GatewayTestCase
         $this->assertTrue(method_exists($this->gateway, 'cardUnbind'));
         $this->assertInstanceOf('\\Omnipay\\PaymentgateRu\\Message\\CardUnbindRequest', $this->gateway->cardUnbind());
     }
+
+    public function testCardExtendBinding()
+    {
+        $this->assertTrue($this->gateway->supportsCardExtendBinding());
+        $this->assertTrue(method_exists($this->gateway, 'cardExtendBinding'));
+        $this->assertInstanceOf(
+            '\\Omnipay\\PaymentgateRu\\Message\\CardExtendBindingRequest',
+            $this->gateway->cardExtendBinding()
+        );
+    }
 }

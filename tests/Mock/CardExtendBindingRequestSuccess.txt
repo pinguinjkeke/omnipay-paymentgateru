@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Server: nginx/1.8.1
+Date: Tue, 04 Oct 2016 14:40:16 GMT
+Content-Type: text/plain;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Expires: Tue, 04 Oct 2016 14:40:15 GMT
+Cache-Control: no-cache
+Access-Control-Allow-Origin: https://playground.paymentgate.ru
+
+{
+  "errorCode": "0",
+  "errorMessage": "Успешно"
+}

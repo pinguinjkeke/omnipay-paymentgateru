@@ -197,7 +197,12 @@ abstract class AbstractCurlRequest extends AbstractRequest
         try {
             $httpResponse = $httpRequest->send();
         } catch (ServerErrorResponseException $e) {
-            return null;
+            $json = json_encode(array(
+                'errorCode' => $e->getCode(),
+                'errorMessage' => $e->getMessage()
+            ));
+
+            return new ServerErrorResponse($this, $json);
         }
 
         return new $this->responseClass($this, $httpResponse->getBody(true));

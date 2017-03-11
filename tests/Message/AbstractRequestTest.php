@@ -104,11 +104,11 @@ abstract class AbstractRequestTest extends TestCase
         $this->assertInstanceOf($responseClass, $this->request->send());
     }
 
-    public function testRequestShouldReturnNullOnException()
+    public function testRequestShouldReturnErrorOnServerException()
     {
         $this->setMockHttpResponse('Request502.txt');
 
-        $this->assertNull($this->request->send());
+        $this->assertRegExp('/Server error response/', $this->request->send()->getMessage());
     }
 
     abstract public function testData();

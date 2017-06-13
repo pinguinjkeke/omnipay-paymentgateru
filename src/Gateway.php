@@ -24,7 +24,7 @@ class Gateway extends AbstractGateway
      *
      * @var string
      */
-    const TEST_URL = 'https://test.paymentgate.ru/testpayment/rest/';
+    const TEST_URL = 'https://web.rbsuat.com/ab/rest/';
 
     /**
      * Production gateway url

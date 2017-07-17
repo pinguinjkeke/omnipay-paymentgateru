@@ -34,6 +34,18 @@ class Gateway extends AbstractGateway
     const PRODUCTION_URL = 'https://engine.paymentgate.ru/payment/rest/';
 
     /**
+     * Tax system constants
+     *
+     * @link https://pay.alfabank.ru/ecommerce/instructions/Connecting%20to%20the%20Fiscalization%20Service.pdf
+     */
+    const TAX_SYSTEM_COMMON = 0;
+    const TAX_SYSTEM_SIMPLIFIED_INCOME = 1;
+    const TAX_SYSTEM_SIMPLIFIED_INCOME_CONSUMPTION = 2;
+    const TAX_SYSTEM_IMPUTED = 3;
+    const TAX_SYSTEM_FARMING = 4;
+    const TAX_SYSTEM_PATENT = 5;
+
+    /**
      * Get gateway display name
      *
      * This can be used by carts to get the display name for each gateway.

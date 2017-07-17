@@ -191,6 +191,28 @@ class AuthorizeRequest extends AbstractCurlRequest
     }
 
     /**
+     * Used tax system
+     *
+     * @return int
+     */
+    public function getTaxSystem()
+    {
+        return $this->getParameter('tax_system');
+    }
+
+    /**
+     * Set tax system
+     *
+     * @param $taxSystem
+     * @return \Omnipay\Common\Message\AbstractRequest
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setTaxSystem($taxSystem)
+    {
+        return $this->setParameter('tax_system', $taxSystem);
+    }
+
+    /**
      * Method name from bank API
      *
      * @return string
@@ -229,7 +251,7 @@ class AuthorizeRequest extends AbstractCurlRequest
 
         $extraParameters = array(
             'currency', 'description', 'language', 'pageView', 'sessionTimeoutSecs',
-            'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin'
+            'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin', 'taxSystem'
         );
 
         foreach ($extraParameters as $parameter) {

@@ -2,6 +2,8 @@
 
 namespace Omnipay\PaymentgateRu\Message;
 
+use Omnipay\PaymentgateRu\Gateway;
+
 /**
  * Class AuthorizeRequestTest
  *
@@ -65,6 +67,9 @@ class AuthorizeRequestTest extends AbstractRequestTest
         $this->assertTrue($this->request->getTwoStep());
         $this->request->setTwoStep(false);
         $this->assertFalse($this->request->getTwoStep());
+
+        $this->assertSame($this->request->setTaxSystem(Gateway::TAX_SYSTEM_COMMON), $this->request);
+        $this->assertEquals(Gateway::TAX_SYSTEM_COMMON, $this->request->getTaxSystem());
     }
 
     public function testData()

@@ -2,8 +2,17 @@
 
 namespace Omnipay\PaymentgateRu\Message;
 
+use Omnipay\PaymentgateRu\OrderBundle\OrderBundle;
+
 class AuthorizeRequest extends AbstractCurlRequest
 {
+    /**
+     * Order Bundle.
+     *
+     * @var OrderBundle
+     */
+    protected $orderBundle;
+
     /**
      * Get language (ISO 639-1)
      *
@@ -233,6 +242,29 @@ class AuthorizeRequest extends AbstractCurlRequest
     }
 
     /**
+     * Set OrderBundle.
+     *
+     * @param OrderBundle $bundle
+     * @return $this
+     */
+    public function setOrderBundle(OrderBundle $bundle)
+    {
+        $this->orderBundle = $bundle;
+
+        return $this;
+    }
+
+    /**
+     * Order Bundle.
+     *
+     * @return OrderBundle
+     */
+    public function getOrderBundle()
+    {
+        return $this->orderBundle;
+    }
+
+    /**
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
      *
@@ -260,6 +292,10 @@ class AuthorizeRequest extends AbstractCurlRequest
             if (method_exists($this, $getter) && ($value = $this->{$getter}())) {
                 $data[$parameter] = $value;
             }
+        }
+
+        if ($this->orderBundle) {
+            $data['orderBundle'] = $this->orderBundle->toArray();
         }
 
         return $data;

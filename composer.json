@@ -28,6 +28,11 @@
       "Omnipay\\PaymentgateRu\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Examples\\": "tests/Examples"
+    }
+  },
   "require": {
     "omnipay/common": "^2.3"
   },

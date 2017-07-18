@@ -3,6 +3,8 @@
 namespace Omnipay\PaymentgateRu\Message;
 
 use Omnipay\PaymentgateRu\Gateway;
+use Omnipay\PaymentgateRu\OrderBundle\OrderBundle;
+use Tests\Examples\Order;
 
 /**
  * Class AuthorizeRequestTest
@@ -132,5 +134,18 @@ class AuthorizeRequestTest extends AbstractRequestTest
         $this->assertEquals($response->getCode(), 1);
         $this->assertEquals($response->getMessage(), 'Заказ с таким номером уже обработан');
         $this->assertNull($response->getTransactionId());
+    }
+
+    public function testItWorksWithOrderBundles()
+    {
+        $orderBundle = new OrderBundle(
+            new Order()
+        );
+
+        $this->assertSame($this->request->setOrderBundle($orderBundle), $this->request);
+        $this->assertEquals($this->request->getOrderBundle(), $orderBundle);
+
+        $data = $this->request->getData();
+        $this->assertEquals($data['orderBundle'], $orderBundle->toArray());
     }
 }

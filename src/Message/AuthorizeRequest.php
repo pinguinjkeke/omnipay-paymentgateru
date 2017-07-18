@@ -206,7 +206,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      */
     public function getTaxSystem()
     {
-        return $this->getParameter('tax_system');
+        return $this->getParameter('taxSystem');
     }
 
     /**
@@ -218,7 +218,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      */
     public function setTaxSystem($taxSystem)
     {
-        return $this->setParameter('tax_system', $taxSystem);
+        return $this->setParameter('taxSystem', $taxSystem);
     }
 
     /**

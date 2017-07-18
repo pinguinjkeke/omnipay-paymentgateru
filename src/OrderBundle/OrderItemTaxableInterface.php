@@ -2,7 +2,7 @@
 
 namespace Omnipay\PaymentgateRu\OrderBundle;
 
-interface CartItemTaxableInterface
+interface OrderItemTaxableInterface
 {
     /**
      * Tax types.

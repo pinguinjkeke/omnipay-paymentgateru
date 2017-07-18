@@ -2,7 +2,7 @@
 
 namespace Tests\Examples;
 
-use Omnipay\PaymentgateRu\OrderBundle\CartItemInterface;
+use Omnipay\PaymentgateRu\OrderBundle\OrderItemInterface;
 use Omnipay\PaymentgateRu\OrderBundle\CustomerInterface;
 use Omnipay\PaymentgateRu\OrderBundle\OrderDeliverableInterface;
 use Omnipay\PaymentgateRu\OrderBundle\OrderInterface;
@@ -52,13 +52,13 @@ class Order implements OrderInterface, OrderDeliverableInterface
     /**
      * Order's cart.
      *
-     * @return CartItemInterface[]
+     * @return OrderItemInterface[]
      */
     public function getItems()
     {
         return array(
-            new CartItem(3200000, 'iPhone 6S 64Gb Space Gray', 2),
-            new CartItem(1000000, 'Samsung Galaxy Note II White', 1)
+            new OrderItem(3200000, 'iPhone 6S 64Gb Space Gray', 2),
+            new OrderItem(1000000, 'Samsung Galaxy Note II White', 1)
         );
     }
 

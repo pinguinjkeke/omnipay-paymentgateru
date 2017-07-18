@@ -2,10 +2,10 @@
 
 namespace Tests\Examples;
 
-use Omnipay\PaymentgateRu\OrderBundle\CartItemInterface;
-use Omnipay\PaymentgateRu\OrderBundle\CartItemTaxableInterface;
+use Omnipay\PaymentgateRu\OrderBundle\OrderItemInterface;
+use Omnipay\PaymentgateRu\OrderBundle\OrderItemTaxableInterface;
 
-class CartItem implements CartItemInterface, CartItemTaxableInterface
+class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
 {
     /**
      * Product price.

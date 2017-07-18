@@ -64,10 +64,10 @@ class OrderBundle
     /**
      * Transform cart item to array.
      *
-     * @param CartItemInterface $cartItem
+     * @param OrderItemInterface $cartItem
      * @return array
      */
-    protected function cartItemToArray(CartItemInterface $cartItem)
+    protected function cartItemToArray(OrderItemInterface $cartItem)
     {
         $array = array(
             'positionId' => $this->positionId,
@@ -88,7 +88,7 @@ class OrderBundle
             $array['discount']['type'] = $cartItem->getDiscountType();
         }
 
-        if ($cartItem instanceof CartItemTaxableInterface) {
+        if ($cartItem instanceof OrderItemTaxableInterface) {
             $array['tax'] = array_filter(array(
                 'taxSum' => $cartItem->getTaxSum(),
                 'taxType' => $cartItem->getTaxSum()

@@ -2,7 +2,7 @@
 
 namespace Omnipay\PaymentgateRu\OrderBundle;
 
-interface CartItemInterface
+interface OrderItemInterface
 {
     /**
      * Product name.

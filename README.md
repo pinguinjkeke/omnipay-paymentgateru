@@ -78,7 +78,7 @@ $success = $response->isSuccess();
 ```php
 class Order extends EloquentModel implements OrderInterface
 {
-    // Должен вернуть массив товаров, реализовывающих CartItemInterface
+    // Должен вернуть массив товаров, реализовывающих OrderItemInterface
     public function getItems()
     {
         return $this->cart;
@@ -149,9 +149,9 @@ class User extends EloquentModel implements CustomerInterface
     }
 }
 ```
-Товар в корзине должен реализовывать интерфейс CartItemInterface.
+Товар в корзине должен реализовывать интерфейс OrderItemInterface.
 ```php
-class CartProduct extends EloquentModel implements CartItemInterface
+class CartProduct extends EloquentModel implements OrderItemInterface
 {
     // Название товара
     public function getName()
@@ -219,7 +219,7 @@ class CartProduct extends EloquentModel implements CartItemInterface
 }
 ```
 Если в рамках вашей системы возможно использование нескольких систем налогообложения для разных товаров
-, то взгляните на интерфейс ```CartItemTaxableInterface```.
+, то взгляните на интерфейс ```OrderItemTaxableInterface```.
 
 К методу авторизации заказа в банке необходимо прикрепить ```Omnipay\PaymentgateRu\OrderBundle\OrderBundle```
 и в качестве аргумента конструктора передать ваш заказ ```OrderInterface```

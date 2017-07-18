@@ -7,7 +7,7 @@ interface OrderInterface
     /**
      * Order's cart.
      *
-     * @return CartItemInterface[]
+     * @return OrderItemInterface[]
      */
     public function getItems();
 

@@ -91,7 +91,7 @@ class OrderBundle
         if ($cartItem instanceof OrderItemTaxableInterface) {
             $array['tax'] = array_filter(array(
                 'taxSum' => $cartItem->getTaxSum(),
-                'taxType' => $cartItem->getTaxSum()
+                'taxType' => $cartItem->getTaxType()
             ));
         }
 

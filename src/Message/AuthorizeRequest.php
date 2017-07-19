@@ -289,8 +289,12 @@ class AuthorizeRequest extends AbstractCurlRequest
         foreach ($extraParameters as $parameter) {
             $getter = 'get' . ucfirst($parameter);
 
-            if (method_exists($this, $getter) && ($value = $this->{$getter}())) {
-                $data[$parameter] = $value;
+            if (method_exists($this, $getter)) {
+                $value = $this->{$getter}();
+
+                if ($value !== null) {
+                    $data[$parameter] = $value;
+                }
             }
         }
 

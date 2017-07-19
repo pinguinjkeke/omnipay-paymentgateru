@@ -84,8 +84,8 @@ class OrderBundle
         );
 
         if ($discountValue = $cartItem->getDiscountValue()) {
-            $array['discount']['value'] = $discountValue;
-            $array['discount']['type'] = $cartItem->getDiscountType();
+            $array['discount']['discountValue'] = $discountValue;
+            $array['discount']['discountType'] = $cartItem->getDiscountType();
         }
 
         if ($cartItem instanceof OrderItemTaxableInterface) {

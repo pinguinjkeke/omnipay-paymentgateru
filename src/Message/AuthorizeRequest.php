@@ -14,16 +14,6 @@ class AuthorizeRequest extends AbstractCurlRequest
     protected $orderBundle;
 
     /**
-     * Get language (ISO 639-1)
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return $this->getParameter('language');
-    }
-
-    /**
      * Get page view
      *
      * @return string

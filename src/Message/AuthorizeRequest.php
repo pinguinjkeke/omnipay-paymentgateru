@@ -299,7 +299,7 @@ class AuthorizeRequest extends AbstractCurlRequest
         }
 
         if ($this->orderBundle) {
-            $data['orderBundle'] = $this->orderBundle->toArray();
+            $data['orderBundle'] = json_encode($this->orderBundle->toArray());
         }
 
         return $data;

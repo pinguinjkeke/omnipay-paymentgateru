@@ -146,6 +146,6 @@ class AuthorizeRequestTest extends AbstractRequestTest
         $this->assertEquals($this->request->getOrderBundle(), $orderBundle);
 
         $data = $this->request->getData();
-        $this->assertEquals($data['orderBundle'], $orderBundle->toArray());
+        $this->assertEquals($data['orderBundle'], json_encode($orderBundle->toArray()));
     }
 }

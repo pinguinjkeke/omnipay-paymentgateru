@@ -185,7 +185,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
 
         $httpRequest = $this->httpClient->post($url)->addHeaders(array(
             'CMS' => 'Omnipay PaymentgateRu package',
-            'Module-Version' => '2.0.0'
+            'Module-Version' => '2.0.1'
         ))->addPostFields(array_merge(array(
             'userName' => $this->getUserName(),
             'password' => $this->getPassword()

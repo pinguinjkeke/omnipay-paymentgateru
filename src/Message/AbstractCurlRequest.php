@@ -173,6 +173,19 @@ abstract class AbstractCurlRequest extends AbstractRequest
     }
 
     /**
+     * Get Request headers
+     *
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return array(
+            'CMS' => 'Omnipay PaymentgateRu package',
+            'Module-Version' => '2.1.0'
+        );
+    }
+
+    /**
      * Send the request with specified data
      *
      * @param  mixed $data The data to send
@@ -183,13 +196,13 @@ abstract class AbstractCurlRequest extends AbstractRequest
     {
         $url = $this->getEndpoint() . $this->getMethod();
 
-        $httpRequest = $this->httpClient->post($url)->addHeaders(array(
-            'CMS' => 'Omnipay PaymentgateRu package',
-            'Module-Version' => '2.0.1'
-        ))->addPostFields(array_merge(array(
-            'userName' => $this->getUserName(),
-            'password' => $this->getPassword()
-        ), $data));
+        $httpRequest = $this->httpClient
+            ->post($url)
+            ->addHeaders($this->getHeaders())
+            ->addPostFields(array_merge(array(
+                'userName' => $this->getUserName(),
+                'password' => $this->getPassword()
+            ), $data));
 
         $httpRequest->getCurlOptions()
             ->set(CURLOPT_SSLVERSION, 6);

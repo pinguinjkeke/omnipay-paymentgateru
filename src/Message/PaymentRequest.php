@@ -2,6 +2,9 @@
 
 namespace Omnipay\PaymentgateRu\Message;
 
+use Guzzle\Http\Exception\ServerErrorResponseException;
+use Omnipay\Common\Message\ResponseInterface;
+
 class PaymentRequest extends AbstractCurlRequest
 {
     /**
@@ -183,5 +186,38 @@ class PaymentRequest extends AbstractCurlRequest
         }
 
         return $data;
+    }
+
+    /**
+     * Send the request with specified data
+     *
+     * @param  mixed $data The data to send
+     * @return ResponseInterface
+     * @throws \Guzzle\Http\Exception\RequestException
+     */
+    public function sendData($data)
+    {
+        $url = $this->getEndpoint() . $this->getMethod();
+
+        $httpRequest = $this->httpClient
+            ->post($url)
+            ->addHeaders($this->getHeaders())
+            ->setBody(json_encode($data));
+
+        $httpRequest->getCurlOptions()
+            ->set(CURLOPT_SSLVERSION, 6);
+
+        try {
+            $httpResponse = $httpRequest->send();
+        } catch (ServerErrorResponseException $e) {
+            $json = json_encode(array(
+                'errorCode' => $e->getCode(),
+                'errorMessage' => $e->getMessage()
+            ));
+
+            return new ServerErrorResponse($this, $json);
+        }
+
+        return new $this->responseClass($this, $httpResponse->getBody(true));
     }
 }

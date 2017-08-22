@@ -24,14 +24,14 @@ class Gateway extends AbstractGateway
      *
      * @var string
      */
-    const TEST_URL = 'https://web.rbsuat.com/ab/rest/';
+    const TEST_URL = 'https://web.rbsuat.com/ab/';
 
     /**
      * Production gateway url
      *
      * @var string
      */
-    const PRODUCTION_URL = 'https://engine.paymentgate.ru/payment/rest/';
+    const PRODUCTION_URL = 'https://engine.paymentgate.ru/payment/';
 
     /**
      * Tax system constants

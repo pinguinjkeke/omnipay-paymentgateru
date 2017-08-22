@@ -11,7 +11,7 @@ class PaymentRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'payment.do';
+        return 'applepay/payment.do';
     }
 
     /**

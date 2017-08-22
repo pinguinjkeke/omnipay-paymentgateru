@@ -33,7 +33,7 @@ class VerifyEnrollmentRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'verifyEnrollment.do';
+        return 'rest/verifyEnrollment.do';
     }
 
     /**

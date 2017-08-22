@@ -33,7 +33,7 @@ class ReverseRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'reverse.do';
+        return 'rest/reverse.do';
     }
 
     /**

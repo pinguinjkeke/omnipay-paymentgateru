@@ -177,7 +177,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'getLastOrdersForMerchants.do';
+        return 'rest/getLastOrdersForMerchants.do';
     }
 
     /**

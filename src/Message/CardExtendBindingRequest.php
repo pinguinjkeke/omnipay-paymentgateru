@@ -55,7 +55,7 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'extendBinding.do';
+        return 'rest/extendBinding.do';
     }
 
     /**

@@ -78,7 +78,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'getBindingsByCardOrId.do';
+        return 'rest/getBindingsByCardOrId.do';
     }
 
     /**

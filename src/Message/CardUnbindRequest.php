@@ -33,7 +33,7 @@ class CardUnbindRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'unBindCard.do';
+        return 'rest/unBindCard.do';
     }
 
     /**

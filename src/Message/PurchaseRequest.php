@@ -121,7 +121,7 @@ class PurchaseRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'paymentOrderBinding.do';
+        return 'rest/paymentOrderBinding.do';
     }
 
     /**

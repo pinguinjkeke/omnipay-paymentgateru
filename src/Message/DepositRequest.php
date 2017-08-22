@@ -33,7 +33,7 @@ class DepositRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'deposit.do';
+        return 'rest/deposit.do';
     }
 
     /**

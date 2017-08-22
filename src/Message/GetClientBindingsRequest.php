@@ -33,7 +33,7 @@ class GetClientBindingsRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'getBindings.do';
+        return 'rest/getBindings.do';
     }
 
     /**

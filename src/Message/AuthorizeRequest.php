@@ -218,7 +218,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return $this->getTwoStep() ? 'registerPreAuth.do' : 'register.do';
+        return $this->getTwoStep() ? 'rest/registerPreAuth.do' : 'rest/register.do';
     }
 
     /**

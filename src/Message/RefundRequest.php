@@ -33,7 +33,7 @@ class RefundRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'refund.do';
+        return 'rest/refund.do';
     }
 
     /**

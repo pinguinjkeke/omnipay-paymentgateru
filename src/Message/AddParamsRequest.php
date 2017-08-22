@@ -71,7 +71,7 @@ class AddParamsRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'addParams.do';
+        return 'rest/addParams.do';
     }
 
     /**

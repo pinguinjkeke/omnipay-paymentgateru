@@ -33,7 +33,7 @@ class StatusRequest extends AbstractCurlRequest
      */
     protected function getMethod()
     {
-        return 'getOrderStatus.do';
+        return 'rest/getOrderStatus.do';
     }
 
     /**

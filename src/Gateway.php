@@ -405,8 +405,19 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * ApplePay Payment request
+     *
+     * @param array $options
+     * @return Message\PaymentRequest
+     */
+    public function applePay(array $options = array())
+    {
+        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\PaymentRequest', $options);
+    }
+
+    /**
      * Bind card
-     * 
+     *
      * @param array $options
      * @return Message\CardBindRequest
      */
@@ -428,7 +439,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Extend card binding
-     * 
+     *
      * @param array $options
      * @return Message\CardExtendBindingRequest
      */
@@ -439,7 +450,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Get client's card bindings
-     * 
+     *
      * @param array $options
      * @return Message\GetClientBindingsRequest
      */
@@ -450,7 +461,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Get card's bindings
-     * 
+     *
      * @param array $options
      * @return Message\GetCardBindingsRequest
      */

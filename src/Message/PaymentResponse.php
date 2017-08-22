@@ -51,6 +51,6 @@ class PaymentResponse extends AbstractCurlResponse
      */
     public function getCode()
     {
-        return $this->isSuccessful() ? 0 : (int) $this->data['error']['code'];;
+        return $this->isSuccessful() ? 0 : (int) $this->data['error']['code'];
     }
 }

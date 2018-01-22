@@ -181,7 +181,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
     {
         return array(
             'CMS' => 'Omnipay PaymentgateRu package',
-            'Module-Version' => '2.1.0'
+            'Module-Version' => '2.1.1'
         );
     }
 

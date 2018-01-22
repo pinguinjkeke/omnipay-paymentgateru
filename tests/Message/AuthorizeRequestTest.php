@@ -87,6 +87,7 @@ class AuthorizeRequestTest extends AbstractRequestTest
             ->setFailUrl('http://test.com/fail')
             ->setClientId('testClientId')
             ->setMerchantLogin('testMerchantLogin')
+            ->setFeatures(AuthorizeRequest::FEATURES_AUTO_PAYMENT)
             ->setCurrency(810);
 
         $data = $this->request->getData();
@@ -100,6 +101,7 @@ class AuthorizeRequestTest extends AbstractRequestTest
         $this->assertEquals($data['failUrl'], 'http://test.com/fail');
         $this->assertEquals($data['clientId'], 'testClientId');
         $this->assertEquals($data['merchantLogin'], 'testMerchantLogin');
+        $this->assertEquals($data['features'], AuthorizeRequest::FEATURES_AUTO_PAYMENT);
     }
 
     public function testSendSuccess()

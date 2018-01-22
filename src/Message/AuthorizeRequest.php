@@ -6,6 +6,10 @@ use Omnipay\PaymentgateRu\OrderBundle\OrderBundle;
 
 class AuthorizeRequest extends AbstractCurlRequest
 {
+    // Available features
+    const FEATURES_AUTO_PAYMENT = 'AUTO_PAYMENT';
+    const FEATURES_VERIFY = 'VERIFY';
+
     /**
      * Order Bundle.
      *
@@ -77,6 +81,28 @@ class AuthorizeRequest extends AbstractCurlRequest
     public function setBindingId($bindingId)
     {
         return $this->setParameter('bindingId', $bindingId);
+    }
+
+    /**
+     * Get features (AUTO_PAYMENT or VERIFY)
+     *
+     * @link https://pay.alfabank.ru/ecommerce/_build/html/auto_payments.html#auto-payment-label
+     * @return string|null
+     */
+    public function getFeatures()
+    {
+        return $this->getParameter('features');
+    }
+
+    /**
+     * Set features (AUTO_PAYMENT or VERIFY)
+     *
+     * @param string $features
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function setFeatures($features)
+    {
+        return $this->setParameter('features', $features);
     }
 
     /**
@@ -272,7 +298,7 @@ class AuthorizeRequest extends AbstractCurlRequest
         );
 
         $extraParameters = array(
-            'currency', 'description', 'language', 'pageView', 'sessionTimeoutSecs',
+            'currency', 'description', 'language', 'pageView', 'sessionTimeoutSecs', 'features',
             'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin', 'taxSystem'
         );
 

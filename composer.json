@@ -34,10 +34,10 @@
     }
   },
   "require": {
-    "omnipay/common": "^2.3"
+    "omnipay/common": "^v3.0-alpha.2"
   },
   "require-dev": {
-    "omnipay/tests": "^2.1",
-    "phpunit/phpunit": "~3.7.0"
+    "omnipay/tests": "^v3.0-alpha.1",
+    "phpunit/phpunit": "^5.7.0"
   }
 }

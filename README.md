@@ -15,17 +15,10 @@
 
 Лучший способ - установка через [Composer](http://getcomposer.org/). Просто добавьте в ваш `composer.json`:
 
-```json
-{
-    "require": {
-        "pinguinjkeke/omnipay-paymentgateru": "~2.0.0"
-    }
-}
-```
-или при помощи командной строки:
 ```
 composer require "pinguinjkeke/omnipay-paymentgateru"
 ```
+Для PHP 5.3 - 7.0 используйте версии 2.*
 
 Запустите composer для обновления:
 
@@ -79,19 +72,18 @@ $success = $response->isSuccess();
 class Order extends EloquentModel implements OrderInterface
 {
     // Должен вернуть массив товаров, реализовывающих OrderItemInterface
-    public function getItems()
+    public function getItems(): iterable
     {
         return $this->cart;
     }
     
     // Должен вернуть пользователя CustomerInterface
-    // Или null, если в передаче данных о покупателе нет необходимости
-    public function getCustomer()
+    public function getCustomer(): ?string
     {
         return $this->customer;
     }
     
-    public function getCreationDate()
+    public function getCreationDate(): int
     {
         return $order->created_at->getTimestamp();
     }
@@ -102,25 +94,25 @@ class Order extends EloquentModel implements OrderInterface
 class Order extends EloquentModel implements OrderInterface, OrderDeliverableInterface
 {
     // Наименование способа доставки или null
-    public function getDeliveryType()
+    public function getDeliveryType(): ?string
     {
         $this->delivery->name;
     }
     
     // Двухсимвольный код страны доставки RU, EN
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->delivery->country;
     }
     
     // Город доставки
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->delivery->city;
     }
     
     // Адрес доставки
-    public function getPostAddress()
+    public function getPostAddress(): ?string
     {
         return $this->delivery->address;
     }
@@ -130,20 +122,18 @@ class Order extends EloquentModel implements OrderInterface, OrderDeliverableInt
 ```php
 class User extends EloquentModel implements CustomerInterface
 {
-    // Email пользователя или null
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
     
-    // Номер телефона без каких-либо символов кроме цифр или null
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return preg_replace('/\D/', '', $this->phone);
     }
     
-    // Альтернативный способ связи с пользователем или null
-    public function getContact()
+    // Альтернативный способ связи с пользователем
+    public function getContact(): ?string
     {
         return "Fax: {$this->user->fax}";
     }
@@ -154,7 +144,7 @@ class User extends EloquentModel implements CustomerInterface
 class CartProduct extends EloquentModel implements OrderItemInterface
 {
     // Название товара
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -166,38 +156,38 @@ class CartProduct extends EloquentModel implements OrderItemInterface
     }
     
     // Единицы измерения
-    public function getMeasure()
+    public function getMeasure(): string
     {
         return 'шт.';
     }
     
     // Количество товара
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }
     
     // Цена на один товар
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->product->price;
     }
     
     // Валюта в формате ISO-4217
     // По правилам банка, все товары, переданные в одном заказе должны быть в одной валюте!
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->product->currency;
     }
     
     // Цена на товар с учетом количества
-    public function getAmount()
+    public function getAmount(): float
     {
         return $this->getPrice() * $this->getQuantity();
     }
     
     // Если есть необходимость в передаче дополнительных свойств, иначе - null
-    public function getDetailParams()
+    public function getDetailParams(): array
     {
         return [
             'color' => $this->product->color,
@@ -206,13 +196,13 @@ class CartProduct extends EloquentModel implements OrderItemInterface
     }
     
     // percent - скидка в процентах, value - фиксированная скидка, null - не используется
-    public function getDiscountType()
+    public function getDiscountType(): ?string
     {
         return 'percent';
     }
     
     // Размер скидки
-    public function getDiscountValue()
+    public function getDiscountValue(): float
     {
         return $this->getPrice() * 0.1;
     }

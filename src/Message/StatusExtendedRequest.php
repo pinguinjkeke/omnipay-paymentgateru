@@ -11,7 +11,7 @@ class StatusExtendedRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getOrderId()
+    public function getOrderId(): ?string
     {
         return $this->getParameter('orderId');
     }
@@ -23,7 +23,7 @@ class StatusExtendedRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setOrderId($orderId)
+    public function setOrderId($orderId): self
     {
         return $this->setParameter('orderId', $orderId);
     }
@@ -33,7 +33,7 @@ class StatusExtendedRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/getOrderStatusExtended.do';
     }
@@ -43,7 +43,7 @@ class StatusExtendedRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'StatusExtendedResponse';
     }
@@ -55,9 +55,9 @@ class StatusExtendedRequest extends AbstractCurlRequest
      * @return mixed
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
-        $data = array();
+        $data = [];
         
         if ($order = $this->getOrderId()) {
             $data['orderId'] = $order;

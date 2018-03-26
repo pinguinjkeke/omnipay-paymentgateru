@@ -9,13 +9,13 @@ class RefundRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'orderId' => $this->orderNumber,
             'amount' => 1000,
-            'currency' => 810
-        );
+            'currency' => 810,
+        ];
     }
 
     public function testData()

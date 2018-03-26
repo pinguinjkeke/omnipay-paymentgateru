@@ -9,7 +9,7 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getBindingId()
+    public function getBindingId(): ?string
     {
         return $this->getParameter('bindingId');
     }
@@ -21,7 +21,7 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setBindingId($bindingId)
+    public function setBindingId($bindingId): self
     {
         return $this->setParameter('bindingId', $bindingId);
     }
@@ -31,7 +31,7 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getNewExpiry()
+    public function getNewExpiry(): ?string
     {
         return $this->getParameter('newExpiry');
     }
@@ -43,7 +43,7 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setNewExpiry($newExpiry)
+    public function setNewExpiry($newExpiry): self
     {
         return $this->setParameter('newExpiry', $newExpiry);
     }
@@ -53,7 +53,7 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/extendBinding.do';
     }
@@ -63,7 +63,7 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'CardExtendBindingResponse';
     }
@@ -72,17 +72,17 @@ class CardExtendBindingRequest extends AbstractCurlRequest
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
      *
-     * @return mixed
+     * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('bindingId', 'newExpiry');
 
-        $data = array(
+        $data = [
             'bindingId' => $this->getBindingId(),
-            'newExpiry' => $this->getNewExpiry()
-        );
+            'newExpiry' => $this->getNewExpiry(),
+        ];
 
         if ($language = $this->getLanguage()) {
             $data['language'] = $language;

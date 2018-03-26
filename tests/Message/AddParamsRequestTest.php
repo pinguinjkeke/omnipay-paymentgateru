@@ -15,16 +15,16 @@ class AddParamsRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'orderId' => $this->orderNumber,
             'language' => 'ru',
-            'params' => array(
+            'params' => [
                 'hello' => 'world',
-                'test' => 'case'
-            )
-        );
+                'test' => 'case',
+            ],
+        ];
     }
 
     public function testAddParamMethod()
@@ -53,7 +53,6 @@ class AddParamsRequestTest extends AbstractRequestTest
     {
         $this->setMockHttpResponse('AddParamsRequestSuccess.txt');
 
-        /** @var AddParamsResponse $response */
         $response = $this->request->send();
 
         $this->assertTrue($response->isSuccessful());

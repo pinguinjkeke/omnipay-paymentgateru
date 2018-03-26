@@ -21,17 +21,17 @@ class GetClientBindingsRequestTest extends AbstractRequestTest
         
         parent::setUp();
     }
-    
+
     /**
      * Array of request parameters to successfully build request object
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
-            'clientId' => $this->clientId
-        );
+        return [
+            'clientId' => $this->clientId,
+        ];
     }
 
     public function testData()

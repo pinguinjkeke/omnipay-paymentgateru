@@ -10,10 +10,10 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * @param string $parameter
      * @return null|string
      */
-    protected function getMerchantOrderParam($parameter)
+    protected function getMerchantOrderParam($parameter): ?string
     {
         if (array_key_exists('merchantOrderParams', $this->data)) {
-            foreach ($this->data['merchantOrderParams'] as $pair) {
+            foreach ((array) $this->data['merchantOrderParams'] as $pair) {
                 if ($parameter === $pair['name']) {
                     return $pair['value'];
                 }
@@ -31,15 +31,15 @@ class StatusExtendedResponse extends AbstractCurlResponse
      */
     protected function getDataValueOrNull($parameter)
     {
-        return array_key_exists($parameter, $this->data) ? $this->data[$parameter] : null;
+        return $this->data[$parameter] ?? null;
     }
-    
+
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return (int) $this->data['errorCode'] === 0;
     }
@@ -47,9 +47,9 @@ class StatusExtendedResponse extends AbstractCurlResponse
     /**
      * Response code
      *
-     * @return null|string A response code from the payment gateway
+     * @return int A response code from the payment gateway
      */
-    public function getCode()
+    public function getCode(): int
     {
         return (int) $this->data['errorCode'];
     }
@@ -59,7 +59,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string A response message from the payment gateway
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->data['errorMessage'];
     }
@@ -69,7 +69,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getOrderNumber()
+    public function getOrderNumber(): ?string
     {
         return $this->data['orderNumber'];
     }
@@ -79,7 +79,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return int
      */
-    public function getOrderStatus()
+    public function getOrderStatus(): int
     {
         return (int) $this->data['orderStatus'];
     }
@@ -89,7 +89,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return int
      */
-    public function getActionCode()
+    public function getActionCode(): int
     {
         return (int) $this->data['actionCode'];
     }
@@ -99,7 +99,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getActionCodeDescription()
+    public function getActionCodeDescription(): ?string
     {
         return $this->data['actionCodeDescription'];
     }
@@ -109,7 +109,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return (int) $this->data['amount'];
     }
@@ -119,7 +119,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return int
      */
-    public function getCurrency()
+    public function getCurrency(): int
     {
         return (int) $this->data['currency'];
     }
@@ -129,7 +129,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getDate()
+    public function getDate(): ?string
     {
         return $this->data['date'];
     }
@@ -139,7 +139,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getOrderDescription()
+    public function getOrderDescription(): ?string
     {
         return $this->getDataValueOrNull('orderDescription');
     }
@@ -149,7 +149,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getIp()
+    public function getIp(): ?string
     {
         return $this->data['ip'];
     }
@@ -159,7 +159,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return null|string
      */
-    public function getOs()
+    public function getOs(): ?string
     {
         return $this->getMerchantOrderParam('browser_os_param');
     }
@@ -169,7 +169,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return null|string
      */
-    public function getBrowserName()
+    public function getBrowserName(): ?string
     {
         return $this->getMerchantOrderParam('browser_name_param');
     }
@@ -179,7 +179,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return null|string
      */
-    public function getBrowserVersion()
+    public function getBrowserVersion(): ?string
     {
         return $this->getMerchantOrderParam('browser_version_param');
     }
@@ -189,7 +189,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return null|string
      */
-    public function getBrowserLanguage()
+    public function getBrowserLanguage(): ?string
     {
         return $this->getMerchantOrderParam('browser_language_param');
     }
@@ -199,7 +199,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return null|string
      */
-    public function getUserAgent()
+    public function getUserAgent(): ?string
     {
         return $this->getMerchantOrderParam('user_agent');
     }
@@ -209,7 +209,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getCardExpiration()
+    public function getCardExpiration(): ?string
     {
         return $this->data['cardAuthInfo']['expiration'];
     }
@@ -219,7 +219,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getCardHolder()
+    public function getCardHolder(): ?string
     {
         return $this->data['cardAuthInfo']['cardholderName'];
     }
@@ -229,7 +229,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getCardPan()
+    public function getCardPan(): ?string
     {
         return $this->data['cardAuthInfo']['pan'];
     }
@@ -239,7 +239,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getBankName()
+    public function getBankName(): ?string
     {
         return $this->data['bankInfo']['bankName'];
     }
@@ -249,7 +249,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getBankCountryCode()
+    public function getBankCountryCode(): ?string
     {
         return $this->data['bankInfo']['bankCountryCode'];
     }
@@ -259,7 +259,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getBankCountryName()
+    public function getBankCountryName(): ?string
     {
         return $this->data['bankInfo']['bankCountryName'];
     }
@@ -269,7 +269,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getClientId()
+    public function getClientId(): ?string
     {
         return $this->getDataValueOrNull('clientId');
     }
@@ -279,7 +279,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getBindingId()
+    public function getBindingId(): ?string
     {
         return $this->getDataValueOrNull('bindingId');
     }

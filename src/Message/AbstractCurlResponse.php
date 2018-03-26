@@ -21,9 +21,9 @@ abstract class AbstractCurlResponse extends AbstractResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return !array_key_exists('errorCode', $this->data);
     }
@@ -43,7 +43,7 @@ abstract class AbstractCurlResponse extends AbstractResponse
      *
      * @return null|string A response message from the payment gateway
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->isSuccessful() ? null : $this->data['errorMessage'];
     }

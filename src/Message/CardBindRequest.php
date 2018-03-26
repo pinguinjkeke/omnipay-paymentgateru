@@ -9,7 +9,7 @@ class CardBindRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getBindingId()
+    public function getBindingId(): ?string
     {
         return $this->getParameter('bindingId');
     }
@@ -21,7 +21,7 @@ class CardBindRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setBindingId($bindingId)
+    public function setBindingId($bindingId): self
     {
         return $this->setParameter('bindingId', $bindingId);
     }
@@ -31,7 +31,7 @@ class CardBindRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/bindCard.do';
     }
@@ -41,7 +41,7 @@ class CardBindRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'CardBindResponse';
     }
@@ -50,15 +50,15 @@ class CardBindRequest extends AbstractCurlRequest
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
      *
-     * @return mixed
+     * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('bindingId');
 
-        return array(
-            'bindingId' => $this->getBindingId()
-        );
+        return [
+            'bindingId' => $this->getBindingId(),
+        ];
     }
 }

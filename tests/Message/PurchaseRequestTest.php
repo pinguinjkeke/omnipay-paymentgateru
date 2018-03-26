@@ -33,14 +33,14 @@ class PurchaseRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'mdOrder' => $this->orderNumber,
             'bindingId' => $this->bindingId,
             'ip' => '192.168.1.1',
-            'language' => 'ru'
-        );
+            'language' => 'ru',
+        ];
     }
 
     public function testData()

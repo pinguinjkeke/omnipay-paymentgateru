@@ -34,12 +34,12 @@ class GetCardBindingsRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'bindingId' => $this->bindingId,
-            'showExpired' => 'false'
-        );
+            'showExpired' => 'false',
+        ];
     }
 
     public function testData()
@@ -89,7 +89,7 @@ class GetCardBindingsRequestTest extends AbstractRequestTest
     public function testGetDataShouldThrowInvalidArgumentException()
     {
         $request = new GetCardBindingsRequest($this->getHttpClient(), $this->getHttpRequest());
-        $request->initialize(array());
+        $request->initialize([]);
 
         try {
             $request->send();

@@ -12,7 +12,7 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'applepay/payment.do';
     }
@@ -22,7 +22,7 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'PaymentResponse';
     }
@@ -32,7 +32,7 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getMerchant()
+    public function getMerchant(): ?string
     {
         return $this->getParameter('merchant');
     }
@@ -44,7 +44,7 @@ class PaymentRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setMerchant($merchant)
+    public function setMerchant($merchant): self
     {
         return $this->setParameter('merchant', $merchant);
     }
@@ -66,7 +66,7 @@ class PaymentRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setPaymentToken($paymentToken)
+    public function setPaymentToken($paymentToken): self
     {
         return $this->setParameter('paymentToken', $paymentToken);
     }
@@ -76,7 +76,7 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @return array|null
      */
-    public function getAdditionalParameters()
+    public function getAdditionalParameters(): ?array
     {
         return $this->getParameter('additionalParameters');
     }
@@ -88,7 +88,7 @@ class PaymentRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setAdditionalParameters(array $additionalParameters)
+    public function setAdditionalParameters(array $additionalParameters): self
     {
         return $this->setParameter('additionalParameters', $additionalParameters);
     }
@@ -98,7 +98,7 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @return int|null
      */
-    public function getClientId()
+    public function getClientId(): ?int
     {
         return $this->getParameter('clientId');
     }
@@ -110,7 +110,7 @@ class PaymentRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setClientId($clientId)
+    public function setClientId($clientId): self
     {
         return $this->setParameter('clientId', $clientId);
     }
@@ -120,7 +120,7 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @return bool|null
      */
-    public function getPreAuth()
+    public function getPreAuth(): ?bool
     {
         return $this->getParameter('preAuth');
     }
@@ -132,7 +132,7 @@ class PaymentRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setPreAuth($preAuth)
+    public function setPreAuth($preAuth): self
     {
         return $this->setParameter('preAuth', (bool) $preAuth);
     }
@@ -142,11 +142,11 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @return array
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return array_merge(
             parent::getHeaders(),
-            array('Content-Type' => 'application/json')
+            ['Content-Type' => 'application/json']
         );
     }
 
@@ -157,23 +157,23 @@ class PaymentRequest extends AbstractCurlRequest
      * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('merchant', 'orderNumber', 'paymentToken');
 
         $paymentToken = $this->getPaymentToken();
 
-        if (is_array($paymentToken)) {
-            $paymentToken = json_encode($paymentToken);
+        if (\is_array($paymentToken)) {
+            $paymentToken = \json_encode($paymentToken);
         }
 
-        $data = array(
+        $data = [
             'merchant' => $this->getMerchant(),
             'orderNumber' => $this->getOrderNumber(),
-            'paymentToken' => base64_encode($paymentToken)
-        );
+            'paymentToken' => \base64_encode($paymentToken),
+        ];
 
-        foreach (array('description', 'language', 'additionalParameters', 'clientId', 'preAuth') as $parameter) {
+        foreach (['description', 'language', 'additionalParameters', 'clientId', 'preAuth'] as $parameter) {
             $method = 'get' . ucfirst($parameter);
 
             if (method_exists($this, $method)) {
@@ -193,27 +193,20 @@ class PaymentRequest extends AbstractCurlRequest
      *
      * @param  mixed $data The data to send
      * @return ResponseInterface
-     * @throws \Guzzle\Http\Exception\RequestException
      */
-    public function sendData($data)
+    public function sendData($data): ResponseInterface
     {
         $url = $this->getEndpoint() . $this->getMethod();
 
-        $httpRequest = $this->httpClient
-            ->post($url)
-            ->addHeaders($this->getHeaders())
-            ->setBody(json_encode($data));
+        $httpResponse = $this->httpClient->post($url, $this->getHeaders(), \json_encode($data));
 
-        $httpRequest->getCurlOptions()
-            ->set(CURLOPT_SSLVERSION, 6);
+        $statusCode = $httpResponse->getStatusCode();
 
-        try {
-            $httpResponse = $httpRequest->send();
-        } catch (ServerErrorResponseException $e) {
-            $json = json_encode(array(
-                'errorCode' => $e->getCode(),
-                'errorMessage' => $e->getMessage()
-            ));
+        if ($statusCode !== 200) {
+            $json = \json_encode([
+                'errorCode' => $statusCode,
+                'errorMessage' => 'Server error response',
+            ]);
 
             return new ServerErrorResponse($this, $json);
         }

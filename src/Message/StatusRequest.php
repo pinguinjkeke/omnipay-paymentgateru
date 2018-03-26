@@ -9,7 +9,7 @@ class StatusRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getOrderId()
+    public function getOrderId(): ?string
     {
         return $this->getParameter('orderId');
     }
@@ -21,17 +21,17 @@ class StatusRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setOrderId($orderId)
+    public function setOrderId($orderId): self
     {
         return $this->setParameter('orderId', $orderId);
     }
-    
+
     /**
      * Method name from bank API
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/getOrderStatus.do';
     }
@@ -41,7 +41,7 @@ class StatusRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'StatusResponse';
     }
@@ -53,13 +53,13 @@ class StatusRequest extends AbstractCurlRequest
      * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('orderId');
 
-        $data = array(
-            'orderId' => $this->getOrderId()
-        );
+        $data = [
+            'orderId' => $this->getOrderId(),
+        ];
         
         if ($language = $this->getLanguage()) {
             $data['language'] = $language;

@@ -45,13 +45,13 @@ class AuthorizeRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'orderNumber' => $this->orderNumber,
             'amount' => $this->amount,
-            'returnUrl' => $this->url
-        );
+            'returnUrl' => $this->url,
+        ];
     }
 
     public function testGettersAndSetters()

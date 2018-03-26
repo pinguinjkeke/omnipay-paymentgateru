@@ -11,7 +11,7 @@ class Customer implements CustomerInterface
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return 'yaavakov@gmail.com';
     }
@@ -21,7 +21,7 @@ class Customer implements CustomerInterface
      *
      * @return string
      */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return '88002000600';
     }
@@ -31,7 +31,7 @@ class Customer implements CustomerInterface
      *
      * @return string
      */
-    public function getContact()
+    public function getContact(): ?string
     {
         return 'Fax: 4321432194';
     }

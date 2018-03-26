@@ -7,20 +7,20 @@ class AddParamsResponse extends AbstractCurlResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
-        return $this->getCode() === 0;
+        return !$this->getCode();
     }
 
     /**
      * Response code
      *
-     * @return int A response code from the payment gateway
+     * @return int|string A response code from the payment gateway
      */
     public function getCode()
     {
-        return (int)$this->data['errorCode'];
+        return (int) $this->data['errorCode'];
     }
 }

@@ -9,11 +9,11 @@ class VerifyEnrollmentRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
-            'pan' => '4111 1111 1111 1111'
-        );
+        return [
+            'pan' => '4111 1111 1111 1111',
+        ];
     }
 
     public function testData()

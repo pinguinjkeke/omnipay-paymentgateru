@@ -7,9 +7,9 @@ class StatusResponse extends AbstractCurlResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return (int) $this->data['ErrorCode'] === 0;
     }
@@ -19,7 +19,7 @@ class StatusResponse extends AbstractCurlResponse
      *
      * @return int A response code from the payment gateway
      */
-    public function getCode()
+    public function getCode(): int
     {
         return (int) $this->data['ErrorCode'];
     }
@@ -29,7 +29,7 @@ class StatusResponse extends AbstractCurlResponse
      *
      * @return string A response message from the payment gateway
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->data['ErrorMessage'];
     }
@@ -39,7 +39,7 @@ class StatusResponse extends AbstractCurlResponse
      *
      * @return int
      */
-    public function getOrderStatus()
+    public function getOrderStatus(): int
     {
         return (int) $this->data['OrderStatus'];
     }
@@ -59,9 +59,9 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getCardPan()
+    public function getCardPan(): ?string
     {
-        return array_key_exists('Pan', $this->data) ? $this->data['Pan'] : null;
+        return $this->data['Pan'] ?? null;
     }
 
     /**
@@ -69,9 +69,9 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getCardExpiration()
+    public function getCardExpiration(): ?string
     {
-        return array_key_exists('expiration', $this->data) ? $this->data['expiration'] : null;
+        return $this->data['expiration'] ?? null;
     }
 
     /**
@@ -79,9 +79,9 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getCardHolder()
+    public function getCardHolder(): ?string
     {
-        return array_key_exists('cardholderName', $this->data) ? $this->data['cardholderName'] : null;
+        return $this->data['cardholderName'] ?? null;
     }
 
     /**
@@ -89,7 +89,7 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return (int) $this->data['Amount'];
     }
@@ -99,7 +99,7 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return int
      */
-    public function getCurrency()
+    public function getCurrency(): int
     {
         return (int) $this->data['currency'];
     }
@@ -109,7 +109,7 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getApprovalCode()
+    public function getApprovalCode(): ?string
     {
         return $this->data['approvalCode'];
     }
@@ -119,7 +119,7 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getIp()
+    public function getIp(): ?string
     {
         return $this->data['Ip'];
     }
@@ -129,9 +129,9 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getDate()
+    public function getDate(): ?string
     {
-        return array_key_exists('date', $this->data) ? $this->data['date'] : null;
+        return $this->data['date'] ?? null;
     }
 
     /**
@@ -139,9 +139,9 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getClientId()
+    public function getClientId(): ?string
     {
-        return array_key_exists('clientId', $this->data) ? $this->data['clientId'] : null;
+        return $this->data['clientId'] ?? null;
     }
 
     /**
@@ -149,8 +149,8 @@ class StatusResponse extends AbstractCurlResponse
      * 
      * @return string
      */
-    public function getBindingId()
+    public function getBindingId(): ?string
     {
-        return array_key_exists('bindingId', $this->data) ? $this->data['bindingId'] : null;
+        return $this->data['bindingId'] ?? null;
     }
 }

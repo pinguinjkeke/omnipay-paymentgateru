@@ -7,9 +7,9 @@ class PurchaseRequest extends AbstractCurlRequest
     /**
      * Get order number
      * 
-     * @return string
+     * @return string|null
      */
-    public function getMdOrder()
+    public function getMdOrder(): ?string
     {
         return $this->getParameter('mdOrder');
     }
@@ -21,7 +21,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setMdOrder($mdOrder)
+    public function setMdOrder($mdOrder): self
     {
         return $this->setParameter('mdOrder', $mdOrder);
     }
@@ -31,7 +31,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getBindingId()
+    public function getBindingId(): ?string
     {
         return $this->getParameter('bindingId');
     }
@@ -43,7 +43,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setBindingId($bindingId)
+    public function setBindingId($bindingId): self
     {
         return $this->setParameter('bindingId', $bindingId);
     }
@@ -53,7 +53,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getIp()
+    public function getIp(): ?string
     {
         return $this->getParameter('ip');
     }
@@ -65,7 +65,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setIp($ip)
+    public function setIp($ip): self
     {
         return $this->setParameter('ip', $ip);
     }
@@ -75,7 +75,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * 
      * @return int
      */
-    public function getCvc()
+    public function getCvc(): ?int
     {
         return $this->getParameter('cvc');
     }
@@ -87,7 +87,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setCvc($cvc)
+    public function setCvc($cvc): self
     {
         return $this->setParameter('cvc', $cvc);
     }
@@ -97,7 +97,7 @@ class PurchaseRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->getParameter('email');
     }
@@ -109,17 +109,17 @@ class PurchaseRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setEmail($email)
+    public function setEmail($email): self
     {
         return $this->setParameter('email', $email);
     }
-    
+
     /**
      * Method name from bank API
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/paymentOrderBinding.do';
     }
@@ -129,7 +129,7 @@ class PurchaseRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'PurchaseResponse';
     }
@@ -138,18 +138,18 @@ class PurchaseRequest extends AbstractCurlRequest
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
      *
-     * @return mixed
+     * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('mdOrder', 'bindingId', 'ip');
 
-        $data = array(
+        $data = [
             'mdOrder' => $this->getMdOrder(),
             'bindingId' => $this->getBindingId(),
-            'ip' => $this->getIp()
-        );
+            'ip' => $this->getIp(),
+        ];
         
         if ($language = $this->getLanguage()) {
             $data['language'] = $language;

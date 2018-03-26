@@ -17,26 +17,26 @@ interface OrderDeliverableInterface
      *
      * @return string|null
      */
-    public function getDeliveryType();
+    public function getDeliveryType(): ?string;
 
     /**
      * 2-symbol country code.
      *
      * @return string
      */
-    public function getCountry();
+    public function getCountry(): ?string;
 
     /**
      * City name.
      *
      * @return string
      */
-    public function getCity();
+    public function getCity(): ?string;
 
     /**
      * Address.
      *
      * @return string
      */
-    public function getPostAddress();
+    public function getPostAddress(): ?string;
 }

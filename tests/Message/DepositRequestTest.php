@@ -23,22 +23,23 @@ class DepositRequestTest extends AbstractRequestTest
      */
     public function setUp()
     {
-        $this->amount = mt_rand(100, 10000);
+        $this->amount = random_int(100, 10000);
 
         parent::setUp();
     }
+
     /**
      * Array of request parameters to successfully build request object
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'orderId' => $this->orderNumber,
             'amount' => $this->amount,
-            'language' => 'ru'
-        );
+            'language' => 'ru',
+        ];
     }
 
     public function testData()

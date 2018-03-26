@@ -9,13 +9,13 @@ class PaymentRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'merchant' => $this->userName,
             'orderNumber' => $this->orderNumber,
-            'paymentToken' => array('data' => '123')
-        );
+            'paymentToken' => ['data' => '123'],
+        ];
     }
 
     public function testData()

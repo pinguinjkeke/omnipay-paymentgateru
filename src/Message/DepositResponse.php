@@ -7,9 +7,9 @@ class DepositResponse extends AbstractCurlResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return !$this->data['errorCode'];
     }
@@ -29,7 +29,7 @@ class DepositResponse extends AbstractCurlResponse
      *
      * @return null|string A response message from the payment gateway
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->data['errorMessage'];
     }

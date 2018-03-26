@@ -11,7 +11,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * 
      * @return int
      */
-    public function getPage()
+    public function getPage(): int
     {
         return (int) $this->getParameter('page');
     }
@@ -23,7 +23,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setPage($page)
+    public function setPage($page): self
     {
         return $this->setParameter('page', (int) $page);
     }
@@ -31,9 +31,9 @@ class GetLastOrdersRequest extends AbstractCurlRequest
     /**
      * Get page size
      * 
-     * @return int
+     * @return int|null
      */
-    public function getSize()
+    public function getSize(): ?int
     {
         return $this->getParameter('size');
     }
@@ -43,13 +43,13 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      *
      * @param int $size
      * @return $this
-     * @throws \Guzzle\Common\Exception\InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setSize($size)
+    public function setSize($size): self
     {
         if ($size > 200) {
-            throw new InvalidArgumentException('Size mustn\'t be higher than 200');
+            throw new InvalidArgumentException('Size must not be higher than 200');
         }
         
         return $this->setParameter('size', $size);
@@ -58,9 +58,9 @@ class GetLastOrdersRequest extends AbstractCurlRequest
     /**
      * Get start of selection (YYYYMMDDHHmmss format)
      * 
-     * @return string
+     * @return string|null
      */
-    public function getFrom()
+    public function getFrom(): ?string
     {
         return $this->getParameter('from');
     }
@@ -72,7 +72,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setFrom($from)
+    public function setFrom($from): self
     {
         return $this->setParameter('from', $from);
     }
@@ -82,7 +82,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getTo()
+    public function getTo(): ?string
     {
         return $this->getParameter('to');
     }
@@ -94,7 +94,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setTo($to)
+    public function setTo($to): self
     {
         return $this->setParameter('to', $to);
     }
@@ -106,7 +106,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getTransactionStates()
+    public function getTransactionStates(): ?string
     {
         return $this->getParameter('transactionStates');
     }
@@ -119,7 +119,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setTransactionStates($transactionStates)
+    public function setTransactionStates($transactionStates): self
     {
         return $this->setParameter('transactionStates', $transactionStates);
     }
@@ -129,7 +129,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getMerchants()
+    public function getMerchants(): ?string
     {
         return $this->getParameter('merchants');
     }
@@ -141,7 +141,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setMerchants($merchants)
+    public function setMerchants($merchants): self
     {
         return $this->setParameter('merchants', $merchants);
     }
@@ -152,7 +152,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getSearchByCreatedDate()
+    public function getSearchByCreatedDate(): ?string
     {
         return $this->getParameter('searchByCreatedDate');
     }
@@ -165,17 +165,17 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setSearchByCreatedDate($searchByCreatedDate)
+    public function setSearchByCreatedDate($searchByCreatedDate): self
     {
         return $this->setParameter('searchByCreatedDate', $searchByCreatedDate);
     }
-    
+
     /**
      * Method name from bank API
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/getLastOrdersForMerchants.do';
     }
@@ -185,7 +185,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'GetLastOrdersResponse';
     }
@@ -197,17 +197,17 @@ class GetLastOrdersRequest extends AbstractCurlRequest
      * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('size', 'from', 'to', 'transactionStates');
 
-        $data = array(
+        $data = [
             'size' => $this->getSize(),
             'from' => $this->getFrom(),
             'to' => $this->getTo(),
             'transactionStates' => $this->getTransactionStates(),
-            'merchants' => $this->getMerchants() ?: ''
-        );
+            'merchants' => $this->getMerchants() ?: '',
+        ];
 
         if ($language = $this->getLanguage()) {
             $data['language'] = $language;

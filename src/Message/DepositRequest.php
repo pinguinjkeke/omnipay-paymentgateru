@@ -9,7 +9,7 @@ class DepositRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getOrderId()
+    public function getOrderId(): ?string
     {
         return $this->getParameter('orderId');
     }
@@ -21,7 +21,7 @@ class DepositRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setOrderId($orderId)
+    public function setOrderId($orderId): self
     {
         return $this->setParameter('orderId', $orderId);
     }
@@ -31,7 +31,7 @@ class DepositRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/deposit.do';
     }
@@ -41,7 +41,7 @@ class DepositRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'DepositResponse';
     }
@@ -53,14 +53,14 @@ class DepositRequest extends AbstractCurlRequest
      * @return mixed
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('orderId', 'amount');
 
-        $data = array(
+        $data = [
             'orderId' => $this->getOrderId(),
-            'amount' => $this->getAmount()
-        );
+            'amount' => $this->getAmount(),
+        ];
 
         if ($language = $this->getLanguage()) {
             $data['language'] = $language;

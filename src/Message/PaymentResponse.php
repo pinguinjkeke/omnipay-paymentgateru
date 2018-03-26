@@ -7,9 +7,9 @@ class PaymentResponse extends AbstractCurlResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->data['success'];
     }
@@ -29,7 +29,7 @@ class PaymentResponse extends AbstractCurlResponse
      *
      * @return null|string A response message from the payment gateway
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->isSuccessful() ? null : $this->data['error']['message'];
     }
@@ -39,7 +39,7 @@ class PaymentResponse extends AbstractCurlResponse
      *
      * @return null|string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->isSuccessful() ? null : $this->data['error']['description'];
     }
@@ -49,7 +49,7 @@ class PaymentResponse extends AbstractCurlResponse
      *
      * @return int A response code from the payment gateway
      */
-    public function getCode()
+    public function getCode(): int
     {
         return $this->isSuccessful() ? 0 : (int) $this->data['error']['code'];
     }

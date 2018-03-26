@@ -3,6 +3,22 @@
 namespace Omnipay\PaymentgateRu;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\PaymentgateRu\Message\AddParamsRequest;
+use Omnipay\PaymentgateRu\Message\AuthorizeRequest;
+use Omnipay\PaymentgateRu\Message\CardBindRequest;
+use Omnipay\PaymentgateRu\Message\CardExtendBindingRequest;
+use Omnipay\PaymentgateRu\Message\CardUnbindRequest;
+use Omnipay\PaymentgateRu\Message\DepositRequest;
+use Omnipay\PaymentgateRu\Message\GetCardBindingsRequest;
+use Omnipay\PaymentgateRu\Message\GetClientBindingsRequest;
+use Omnipay\PaymentgateRu\Message\GetLastOrdersRequest;
+use Omnipay\PaymentgateRu\Message\PaymentRequest;
+use Omnipay\PaymentgateRu\Message\PurchaseRequest;
+use Omnipay\PaymentgateRu\Message\RefundRequest;
+use Omnipay\PaymentgateRu\Message\ReverseRequest;
+use Omnipay\PaymentgateRu\Message\StatusExtendedRequest;
+use Omnipay\PaymentgateRu\Message\StatusRequest;
+use Omnipay\PaymentgateRu\Message\VerifyEnrollmentRequest;
 
 /**
  * Class Gateway.
@@ -24,33 +40,33 @@ class Gateway extends AbstractGateway
      *
      * @var string
      */
-    const TEST_URL = 'https://web.rbsuat.com/ab/';
+    public const TEST_URL = 'https://web.rbsuat.com/ab/';
 
     /**
      * Production gateway url
      *
      * @var string
      */
-    const PRODUCTION_URL = 'https://engine.paymentgate.ru/payment/';
+    public const PRODUCTION_URL = 'https://engine.paymentgate.ru/payment/';
 
     /**
      * Tax system constants
      *
      * @link https://pay.alfabank.ru/ecommerce/instructions/Connecting%20to%20the%20Fiscalization%20Service.pdf
      */
-    const TAX_SYSTEM_COMMON = 0;
-    const TAX_SYSTEM_SIMPLIFIED_INCOME = 1;
-    const TAX_SYSTEM_SIMPLIFIED_INCOME_CONSUMPTION = 2;
-    const TAX_SYSTEM_IMPUTED = 3;
-    const TAX_SYSTEM_FARMING = 4;
-    const TAX_SYSTEM_PATENT = 5;
+    public const TAX_SYSTEM_COMMON = 0;
+    public const TAX_SYSTEM_SIMPLIFIED_INCOME = 1;
+    public const TAX_SYSTEM_SIMPLIFIED_INCOME_CONSUMPTION = 2;
+    public const TAX_SYSTEM_IMPUTED = 3;
+    public const TAX_SYSTEM_FARMING = 4;
+    public const TAX_SYSTEM_PATENT = 5;
 
     /**
      * Get gateway display name
      *
      * This can be used by carts to get the display name for each gateway.
      */
-    public function getName()
+    public function getName(): string
     {
         return 'PaymentgateRu';
     }
@@ -58,23 +74,23 @@ class Gateway extends AbstractGateway
     /**
      * Define gateway parameters, in the following format:
      *
-     * array(
+     * [
      *     'username' => '', // string variable
      *     'testMode' => false, // boolean variable
-     *     'landingPage' => array('billing', 'login'), // enum variable, first item is default
-     * );
+     *     'landingPage' => ['billing', 'login'], // enum variable, first item is default
+     * ];
      * 
      * @return array
      */
-    public function getDefaultParameters()
+    public function getDefaultParameters(): array
     {
-        return array(
+        return [
             'testMode' => true,
             'endpoint' => self::TEST_URL,
             'userName' => '',
             'password' => '',
             'orderNumber' => ''
-        );
+        ];
     }
 
     /**
@@ -83,7 +99,7 @@ class Gateway extends AbstractGateway
      * @param bool $testMode
      * @return $this
      */
-    public function setTestMode($testMode)
+    public function setTestMode($testMode): self
     {
         $this->setEndpoint($testMode ? self::TEST_URL : self::PRODUCTION_URL);
 
@@ -95,7 +111,7 @@ class Gateway extends AbstractGateway
      *
      * @return string
      */
-    public function getEndpoint()
+    public function getEndpoint(): ?string
     {
         return $this->getParameter('endpoint');
     }
@@ -106,7 +122,7 @@ class Gateway extends AbstractGateway
      * @param string $endpoint
      * @return $this
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint($endpoint): self
     {
         return $this->setParameter('endpoint', $endpoint);
     }
@@ -116,7 +132,7 @@ class Gateway extends AbstractGateway
      *
      * @return string
      */
-    public function getUserName()
+    public function getUserName(): ?string
     {
         return $this->getParameter('userName');
     }
@@ -127,7 +143,7 @@ class Gateway extends AbstractGateway
      * @param string $userName
      * @return $this
      */
-    public function setUserName($userName)
+    public function setUserName($userName): self
     {
         return $this->setParameter('userName', $userName);
     }
@@ -137,7 +153,7 @@ class Gateway extends AbstractGateway
      *
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->getParameter('password');
     }
@@ -148,7 +164,7 @@ class Gateway extends AbstractGateway
      * @param string $password
      * @return $this
      */
-    public function setPassword($password)
+    public function setPassword($password): self
     {
         return $this->setParameter('password', $password);
     }
@@ -158,7 +174,7 @@ class Gateway extends AbstractGateway
      *
      * @return int|string
      */
-    public function getOrderNumber()
+    public function getOrderNumber(): ?string
     {
         return $this->getParameter('orderNumber');
     }
@@ -169,7 +185,7 @@ class Gateway extends AbstractGateway
      * @param int|string $orderNumber
      * @return $this
      */
-    public function setOrderNumber($orderNumber)
+    public function setOrderNumber($orderNumber): self
     {
         return $this->setParameter('orderNumber', $orderNumber);
     }
@@ -177,9 +193,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports deposit?
      *
-     * @return boolean
+     * @return bool
      */
-    public function supportsDeposit()
+    public function supportsDeposit(): bool
     {
         return method_exists($this, 'deposit');
     }
@@ -187,9 +203,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports status?
      * 
-     * @return boolean
+     * @return bool
      */
-    public function supportsStatus()
+    public function supportsStatus(): bool
     {
         return method_exists($this, 'status');
     }
@@ -197,9 +213,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports status extended?
      *
-     * @return boolean
+     * @return bool
      */
-    public function supportsStatusExtended()
+    public function supportsStatusExtended(): bool
     {
         return method_exists($this, 'statusExtended');
     }
@@ -207,9 +223,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports reverse?
      *
-     * @return boolean
+     * @return bool
      */
-    public function supportsReverse()
+    public function supportsReverse(): bool
     {
         return method_exists($this, 'reverse');
     }
@@ -217,9 +233,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports card 3ds enrollment verifying?
      *
-     * @return boolean
+     * @return bool
      */
-    public function supportsVerifyEnrollment()
+    public function supportsVerifyEnrollment(): bool
     {
         return method_exists($this, 'verifyEnrollment');
     }
@@ -227,9 +243,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports order params adding?
      * 
-     * @return boolean
+     * @return bool
      */
-    public function supportsAddParams()
+    public function supportsAddParams(): bool
     {
         return method_exists($this, 'addParams');
     }
@@ -237,9 +253,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports order list?
      *
-     * @return boolean
+     * @return bool
      */
-    public function supportsGetLastOrders()
+    public function supportsGetLastOrders(): bool
     {
         return method_exists($this, 'getLastOrders');
     }
@@ -247,9 +263,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports card binding?
      * 
-     * @return boolean
+     * @return bool
      */
-    public function supportsCardBind()
+    public function supportsCardBind(): bool
     {
         return method_exists($this, 'cardBind');
     }
@@ -257,9 +273,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports card unbinding?
      * 
-     * @return boolean
+     * @return bool
      */
-    public function supportsCardUnbind()
+    public function supportsCardUnbind(): bool
     {
         return method_exists($this, 'cardUnbind');
     }
@@ -267,9 +283,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports card binding extension?
      *
-     * @return boolean
+     * @return bool
      */
-    public function supportsCardExtendBinding()
+    public function supportsCardExtendBinding(): bool
     {
         return method_exists($this, 'cardExtendBinding');
     }
@@ -277,9 +293,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports client's card bindings list?
      * 
-     * @return boolean
+     * @return bool
      */
-    public function supportsGetClientBindings()
+    public function supportsGetClientBindings(): bool
     {
         return method_exists($this, 'getClientBindings');
     }
@@ -287,9 +303,9 @@ class Gateway extends AbstractGateway
     /**
      * Does gateway supports cards bindings list?
      * 
-     * @return boolean
+     * @return bool
      */
-    public function supportsGetCardBindings()
+    public function supportsGetCardBindings(): bool
     {
         return method_exists($this, 'getCardBindings');
     }
@@ -300,9 +316,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\AuthorizeRequest
      */
-    public function authorize(array $options = array())
+    public function authorize(array $options = []): AuthorizeRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\AuthorizeRequest', $options);
+        return $this->createRequest(AuthorizeRequest::class, $options);
     }
 
     /**
@@ -311,9 +327,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\DepositRequest
      */
-    public function deposit(array $options = array())
+    public function deposit(array $options = []): DepositRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\DepositRequest', $options);
+        return $this->createRequest(DepositRequest::class, $options);
     }
 
     /**
@@ -322,9 +338,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\StatusRequest
      */
-    public function status(array $options = array())
+    public function status(array $options = []): StatusRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\StatusRequest', $options);
+        return $this->createRequest(StatusRequest::class, $options);
     }
 
     /**
@@ -333,9 +349,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\StatusExtendedRequest
      */
-    public function statusExtended(array $options = array())
+    public function statusExtended(array $options = []): StatusExtendedRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\StatusExtendedRequest', $options);
+        return $this->createRequest(StatusExtendedRequest::class, $options);
     }
 
     /**
@@ -344,9 +360,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\ReverseRequest
      */
-    public function reverse(array $options = array())
+    public function reverse(array $options = []): ReverseRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\ReverseRequest', $options);
+        return $this->createRequest(ReverseRequest::class, $options);
     }
 
     /**
@@ -355,9 +371,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\RefundRequest
      */
-    public function refund(array $options = array())
+    public function refund(array $options = []): RefundRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\RefundRequest', $options);
+        return $this->createRequest(RefundRequest::class, $options);
     }
 
     /**
@@ -366,9 +382,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\VerifyEnrollmentRequest
      */
-    public function verifyEnrollment(array $options = array())
+    public function verifyEnrollment(array $options = []): VerifyEnrollmentRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\VerifyEnrollmentRequest', $options);
+        return $this->createRequest(VerifyEnrollmentRequest::class, $options);
     }
 
     /**
@@ -377,9 +393,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\AddParamsRequest
      */
-    public function addParams(array $options = array())
+    public function addParams(array $options = []): AddParamsRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\AddParamsRequest', $options);
+        return $this->createRequest(AddParamsRequest::class, $options);
     }
 
     /**
@@ -388,9 +404,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\GetLastOrdersRequest
      */
-    public function getLastOrders(array $options = array())
+    public function getLastOrders(array $options = []): GetLastOrdersRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\GetLastOrdersRequest', $options);
+        return $this->createRequest(GetLastOrdersRequest::class, $options);
     }
 
     /**
@@ -399,9 +415,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\PurchaseRequest
      */
-    public function purchase(array $options = array())
+    public function purchase(array $options = []): PurchaseRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\PurchaseRequest', $options);
+        return $this->createRequest(PurchaseRequest::class, $options);
     }
 
     /**
@@ -410,9 +426,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\PaymentRequest
      */
-    public function applePay(array $options = array())
+    public function applePay(array $options = []): PaymentRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\PaymentRequest', $options);
+        return $this->createRequest(PaymentRequest::class, $options);
     }
 
     /**
@@ -421,9 +437,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\CardBindRequest
      */
-    public function cardBind(array $options = array())
+    public function cardBind(array $options = []): CardBindRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\CardBindRequest', $options);
+        return $this->createRequest(CardBindRequest::class, $options);
     }
 
     /**
@@ -432,9 +448,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\CardUnbindRequest
      */
-    public function cardUnbind(array $options = array())
+    public function cardUnbind(array $options = []): CardUnbindRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\CardUnbindRequest', $options);
+        return $this->createRequest(CardUnbindRequest::class, $options);
     }
 
     /**
@@ -443,9 +459,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\CardExtendBindingRequest
      */
-    public function cardExtendBinding(array $options = array())
+    public function cardExtendBinding(array $options = []): CardExtendBindingRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\CardExtendBindingRequest', $options);
+        return $this->createRequest(CardExtendBindingRequest::class, $options);
     }
 
     /**
@@ -454,9 +470,9 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\GetClientBindingsRequest
      */
-    public function getClientBindings(array $options = array())
+    public function getClientBindings(array $options = []): GetClientBindingsRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\GetClientBindingsRequest', $options);
+        return $this->createRequest(GetClientBindingsRequest::class, $options);
     }
 
     /**
@@ -465,8 +481,8 @@ class Gateway extends AbstractGateway
      * @param array $options
      * @return Message\GetCardBindingsRequest
      */
-    public function getCardBindings(array $options = array())
+    public function getCardBindings(array $options = []): GetCardBindingsRequest
     {
-        return $this->createRequest('\\Omnipay\\PaymentgateRu\\Message\\GetCardBindingsRequest', $options);
+        return $this->createRequest(GetCardBindingsRequest::class, $options);
     }
 }

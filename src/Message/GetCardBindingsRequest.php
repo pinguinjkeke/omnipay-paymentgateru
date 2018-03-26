@@ -11,7 +11,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getPan()
+    public function getPan(): ?string
     {
         return $this->getParameter('pan');
     }
@@ -23,7 +23,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setPan($pan)
+    public function setPan($pan): self
     {
         return $this->setParameter('pan', $pan);
     }
@@ -33,7 +33,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getBindingId()
+    public function getBindingId(): ?string
     {
         return $this->getParameter('bindingId');
     }
@@ -45,7 +45,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setBindingId($bindingId)
+    public function setBindingId($bindingId): self
     {
         return $this->setParameter('bindingId', $bindingId);
     }
@@ -55,7 +55,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getShowExpired()
+    public function getShowExpired(): ?string
     {
         return $this->getParameter('showExpired');
     }
@@ -67,16 +67,17 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setShowExpired($showExpired)
+    public function setShowExpired($showExpired): self
     {
         return $this->setParameter('showExpired', $showExpired);
     }
+
     /**
      * Method name from bank API
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/getBindingsByCardOrId.do';
     }
@@ -86,7 +87,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'GetCardBindingsResponse';
     }
@@ -95,13 +96,12 @@ class GetCardBindingsRequest extends AbstractCurlRequest
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
      *
-     * @return mixed
-     * @throws \Omnipay\Common\Exception\InvalidRequestException
+     * @return array
      * @throws \InvalidArgumentException
      */
-    public function getData()
+    public function getData(): array
     {
-        $data = array();
+        $data = [];
         
         if ($pan = $this->getPan()) {
             $data['pan'] = $pan;
@@ -111,7 +111,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
             $data['bindingId'] = $bindingId;
         }
 
-        if (count($data) === 0) {
+        if (\count($data) === 0) {
             throw new InvalidArgumentException('You must provide pan or bindingId to data');
         }
         

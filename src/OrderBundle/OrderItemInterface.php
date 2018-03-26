@@ -9,28 +9,28 @@ interface OrderItemInterface
      *
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Quantity measure
      *
      * @return string
      */
-    public function getMeasure();
+    public function getMeasure(): string;
 
     /**
      * Quantity value
      *
      * @return int|float
      */
-    public function getQuantity();
+    public function getQuantity(): float;
 
     /**
      * Single product price.
      *
      * @return int
      */
-    public function getAmount();
+    public function getAmount(): int;
 
     /**
      * Product code. (i.e. id inside your system or article)
@@ -44,14 +44,14 @@ interface OrderItemInterface
      *
      * @return array|null
      */
-    public function getDetailParams();
+    public function getDetailParams(): ?iterable;
 
     /**
      * Product price.
      *
      * @return int|float
      */
-    public function getPrice();
+    public function getPrice(): float;
 
     /**
      * Product currency in ISO-4217 format.
@@ -59,7 +59,7 @@ interface OrderItemInterface
      *
      * @return string|null
      */
-    public function getCurrency();
+    public function getCurrency(): ?string;
 
     /**
      * Discount type ("percent" or "value").
@@ -67,7 +67,7 @@ interface OrderItemInterface
      *
      * @return string|null
      */
-    public function getDiscountType();
+    public function getDiscountType(): ?string;
 
     /**
      * Returns discount value.
@@ -75,5 +75,5 @@ interface OrderItemInterface
      *
      * @return int|float|null
      */
-    public function getDiscountValue();
+    public function getDiscountValue(): ?float;
 }

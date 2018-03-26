@@ -7,8 +7,8 @@ use Omnipay\PaymentgateRu\OrderBundle\OrderBundle;
 class AuthorizeRequest extends AbstractCurlRequest
 {
     // Available features
-    const FEATURES_AUTO_PAYMENT = 'AUTO_PAYMENT';
-    const FEATURES_VERIFY = 'VERIFY';
+    public const FEATURES_AUTO_PAYMENT = 'AUTO_PAYMENT';
+    public const FEATURES_VERIFY = 'VERIFY';
 
     /**
      * Order Bundle.
@@ -20,9 +20,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Get page view
      *
-     * @return string
+     * @return string|null
      */
-    public function getPageView()
+    public function getPageView(): ?string
     {
         return $this->getParameter('pageView');
     }
@@ -31,10 +31,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Defaults are DESKTOP or MOBILE if you implemented it in your payment page template.
      *
      * @param string $pageView
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setPageView($pageView)
+    public function setPageView($pageView): self
     {
         return $this->setParameter('pageView', $pageView);
     }
@@ -42,9 +42,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Get session timeout in seconds
      *
-     * @return int
+     * @return int|null
      */
-    public function getSessionTimeoutSecs()
+    public function getSessionTimeoutSecs(): ?int
     {
         return $this->getParameter('sessionTimeoutSecs');
     }
@@ -53,10 +53,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set session timeout in seconds
      *
      * @param int $sessionTimeoutSecs
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setSessionTimeoutSecs($sessionTimeoutSecs)
+    public function setSessionTimeoutSecs($sessionTimeoutSecs): self
     {
         return $this->setParameter('sessionTimeoutSecs', $sessionTimeoutSecs);
     }
@@ -64,9 +64,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Get id of previously created binding. Use only if you work with bindings.
      *
-     * @return string
+     * @return string|null
      */
-    public function getBindingId()
+    public function getBindingId(): ?string
     {
         return $this->getParameter('bindingId');
     }
@@ -75,10 +75,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set id of previously created binding. Use only if you work with bindings.
      *
      * @param string $bindingId
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setBindingId($bindingId)
+    public function setBindingId($bindingId): self
     {
         return $this->setParameter('bindingId', $bindingId);
     }
@@ -89,7 +89,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      * @link https://pay.alfabank.ru/ecommerce/_build/html/auto_payments.html#auto-payment-label
      * @return string|null
      */
-    public function getFeatures()
+    public function getFeatures(): ?string
     {
         return $this->getParameter('features');
     }
@@ -98,9 +98,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set features (AUTO_PAYMENT or VERIFY)
      *
      * @param string $features
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
+     * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setFeatures($features)
+    public function setFeatures($features): self
     {
         return $this->setParameter('features', $features);
     }
@@ -108,9 +109,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Get order expiration date in yyyy-MM-ddTHH:mm:ss
      *
-     * @return string
+     * @return string|null
      */
-    public function getExpirationDate()
+    public function getExpirationDate(): ?string
     {
         return $this->getParameter('expirationDate');
     }
@@ -119,10 +120,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set order expiration date in yyyy-MM-ddTHH:mm:ss
      *
      * @param string $expirationDate
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setExpirationDate($expirationDate)
+    public function setExpirationDate($expirationDate): self
     {
         return $this->setParameter('expirationDate', $expirationDate);
     }
@@ -130,9 +131,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Get fail payment url
      *
-     * @return string
+     * @return string|null
      */
-    public function getFailUrl()
+    public function getFailUrl(): ?string
     {
         return $this->getParameter('failUrl');
     }
@@ -141,10 +142,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set fail payment url
      *
      * @param string $failUrl
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setFailUrl($failUrl)
+    public function setFailUrl($failUrl): self
     {
         return $this->setParameter('failUrl', $failUrl);
     }
@@ -152,9 +153,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Get client id for bindings
      *
-     * @return string
+     * @return string|null
      */
-    public function getClientId()
+    public function getClientId(): ?string
     {
         return $this->getParameter('clientId');
     }
@@ -163,10 +164,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set client id for bindings
      *
      * @param string $clientId
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setClientId($clientId)
+    public function setClientId($clientId): self
     {
         return $this->setParameter('clientId', $clientId);
     }
@@ -174,9 +175,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Additional merchant login if you using one.
      *
-     * @return string
+     * @return string|null
      */
-    public function getMerchantLogin()
+    public function getMerchantLogin(): ?string
     {
         return $this->getParameter('merchantLogin');
     }
@@ -185,10 +186,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Additional merchant login if you using one.
      *
      * @param string $merchantLogin
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setMerchantLogin($merchantLogin)
+    public function setMerchantLogin($merchantLogin): self
     {
         return $this->setParameter('merchantLogin', $merchantLogin);
     }
@@ -196,9 +197,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Is order two stepped?
      *
-     * @return boolean
+     * @return bool|null
      */
-    public function getTwoStep()
+    public function getTwoStep(): ?bool
     {
         return $this->getParameter('two_stage');
     }
@@ -206,11 +207,11 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Set two step order authentication
      *
-     * @param boolean $twoStage
+     * @param bool $twoStage
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setTwoStep($twoStage)
+    public function setTwoStep($twoStage): self
     {
         return $this->setParameter('two_stage', $twoStage);
     }
@@ -218,9 +219,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Used tax system
      *
-     * @return int
+     * @return int|null
      */
-    public function getTaxSystem()
+    public function getTaxSystem(): ?int
     {
         return $this->getParameter('taxSystem');
     }
@@ -229,10 +230,10 @@ class AuthorizeRequest extends AbstractCurlRequest
      * Set tax system
      *
      * @param $taxSystem
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setTaxSystem($taxSystem)
+    public function setTaxSystem($taxSystem): self
     {
         return $this->setParameter('taxSystem', $taxSystem);
     }
@@ -242,7 +243,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return $this->getTwoStep() ? 'rest/registerPreAuth.do' : 'rest/register.do';
     }
@@ -252,7 +253,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'AuthorizeResponse';
     }
@@ -263,7 +264,7 @@ class AuthorizeRequest extends AbstractCurlRequest
      * @param OrderBundle $bundle
      * @return $this
      */
-    public function setOrderBundle(OrderBundle $bundle)
+    public function setOrderBundle(OrderBundle $bundle): self
     {
         $this->orderBundle = $bundle;
 
@@ -273,9 +274,9 @@ class AuthorizeRequest extends AbstractCurlRequest
     /**
      * Order Bundle.
      *
-     * @return OrderBundle
+     * @return OrderBundle|null
      */
-    public function getOrderBundle()
+    public function getOrderBundle(): ?OrderBundle
     {
         return $this->orderBundle;
     }
@@ -287,20 +288,20 @@ class AuthorizeRequest extends AbstractCurlRequest
      * @return mixed
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('orderNumber', 'amount', 'returnUrl');
         
-        $data = array(
+        $data = [
             'orderNumber' => $this->getOrderNumber(),
             'amount' => $this->getAmount(),
-            'returnUrl' => $this->getReturnUrl()
-        );
+            'returnUrl' => $this->getReturnUrl(),
+        ];
 
-        $extraParameters = array(
+        $extraParameters = [
             'currency', 'description', 'language', 'pageView', 'sessionTimeoutSecs', 'features',
-            'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin', 'taxSystem'
-        );
+            'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin', 'taxSystem',
+        ];
 
         foreach ($extraParameters as $parameter) {
             $getter = 'get' . ucfirst($parameter);

@@ -9,7 +9,7 @@ class VerifyEnrollmentRequest extends AbstractCurlRequest
      * 
      * @return string
      */
-    public function getPan()
+    public function getPan(): ?string
     {
         return $this->getParameter('pan');
     }
@@ -21,17 +21,17 @@ class VerifyEnrollmentRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setPan($pan)
+    public function setPan($pan): self
     {
         return $this->setParameter('pan', $pan);
     }
-    
+
     /**
      * Method name from bank API
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/verifyEnrollment.do';
     }
@@ -41,7 +41,7 @@ class VerifyEnrollmentRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'VerifyEnrollmentResponse';
     }
@@ -52,10 +52,10 @@ class VerifyEnrollmentRequest extends AbstractCurlRequest
      *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
-        return array(
-            'pan' => $this->getPan()
-        );
+        return [
+            'pan' => $this->getPan(),
+        ];
     }
 }

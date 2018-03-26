@@ -7,9 +7,9 @@ class GetClientBindingsResponse extends AbstractCurlResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->getCode() === 0;
     }
@@ -17,9 +17,9 @@ class GetClientBindingsResponse extends AbstractCurlResponse
     /**
      * Response code
      *
-     * @return int A response code from the payment gateway
+     * @return null|int A response code from the payment gateway
      */
-    public function getCode()
+    public function getCode(): ?int
     {
         return (int) $this->data['errorCode'];
     }
@@ -29,7 +29,7 @@ class GetClientBindingsResponse extends AbstractCurlResponse
      *
      * @return string A response message from the payment gateway
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->data['errorMessage'];
     }

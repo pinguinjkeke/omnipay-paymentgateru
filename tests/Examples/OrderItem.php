@@ -47,7 +47,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -57,7 +57,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return string
      */
-    public function getMeasure()
+    public function getMeasure(): string
     {
         return 'шт';
     }
@@ -67,7 +67,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return int|float
      */
-    public function getQuantity()
+    public function getQuantity(): float
     {
         return $this->quantity;
     }
@@ -77,7 +77,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return $this->getPrice() * $this->getQuantity();
     }
@@ -87,7 +87,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return int|float
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
@@ -107,12 +107,12 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return array|null
      */
-    public function getDetailParams()
+    public function getDetailParams(): ?iterable
     {
-        return array(
+        return [
             'first_prop' => 'some value',
-            'second_prop' => 456
-        );
+            'second_prop' => 456,
+        ];
     }
 
     /**
@@ -121,7 +121,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return 643;
     }
@@ -132,7 +132,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return string|null
      */
-    public function getDiscountType()
+    public function getDiscountType(): ?string
     {
         return 'percent';
     }
@@ -143,7 +143,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return int|float|null
      */
-    public function getDiscountValue()
+    public function getDiscountValue(): ?float
     {
         return $this->getPrice() / 10;
     }
@@ -153,7 +153,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return int
      */
-    public function getTaxType()
+    public function getTaxType(): int
     {
         return self::TAX_TYPE_0;
     }
@@ -163,7 +163,7 @@ class OrderItem implements OrderItemInterface, OrderItemTaxableInterface
      *
      * @return int
      */
-    public function getTaxSum()
+    public function getTaxSum(): int
     {
         return $this->getPrice() * 0.18;
     }

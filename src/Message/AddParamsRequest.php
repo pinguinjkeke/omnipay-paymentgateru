@@ -9,7 +9,7 @@ class AddParamsRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getOrderId()
+    public function getOrderId(): string
     {
         return $this->getParameter('orderId');
     }
@@ -18,10 +18,10 @@ class AddParamsRequest extends AbstractCurlRequest
      * Set order id
      *
      * @param string $orderId
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setOrderId($orderId)
+    public function setOrderId($orderId): self
     {
         return $this->setParameter('orderId', $orderId);
     }
@@ -31,7 +31,7 @@ class AddParamsRequest extends AbstractCurlRequest
      * 
      * @return array
      */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->getParameter('params');
     }
@@ -40,10 +40,10 @@ class AddParamsRequest extends AbstractCurlRequest
      * Set order additional parameters
      *
      * @param array $params
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|\Omnipay\PaymentgateRu\Message\AddParamsRequest
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setParams($params)
+    public function setParams($params): self
     {
         return $this->setParameter('params', $params);
     }
@@ -53,23 +53,23 @@ class AddParamsRequest extends AbstractCurlRequest
      *
      * @param string $key
      * @param mixed $value
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function addParam($key, $value)
+    public function addParam($key, $value): self
     {
         $params = $this->getParams();
         $params[$key] = $value;
         
         return $this->setParameter('params', $params);
     }
-    
+
     /**
      * Method name from bank API
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/addParams.do';
     }
@@ -79,7 +79,7 @@ class AddParamsRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'AddParamsResponse';
     }
@@ -88,17 +88,17 @@ class AddParamsRequest extends AbstractCurlRequest
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
      *
-     * @return mixed
+     * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('orderId', 'params');
         
-        $data = array(
+        $data = [
             'orderId' => $this->getOrderId(),
-            'params' => json_encode($this->getParams())
-        );
+            'params' => json_encode($this->getParams()),
+        ];
         
         if ($language = $this->getLanguage()) {
             $data['language'] = $language;

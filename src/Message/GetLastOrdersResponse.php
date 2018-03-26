@@ -7,19 +7,19 @@ class GetLastOrdersResponse extends AbstractCurlResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->getCode() === 0;
     }
-    
+
     /**
      * Response code
      *
      * @return int A response code from the payment gateway
      */
-    public function getCode()
+    public function getCode(): int
     {
         return (int) $this->data['errorCode'];
     }
@@ -29,7 +29,7 @@ class GetLastOrdersResponse extends AbstractCurlResponse
      * 
      * @return int
      */
-    public function getTotalCount()
+    public function getTotalCount(): int
     {
         return (int) $this->data['totalCount'];
     }
@@ -39,7 +39,7 @@ class GetLastOrdersResponse extends AbstractCurlResponse
      * 
      * @return int
      */
-    public function getPage()
+    public function getPage(): int
     {
         return (int) $this->data['page'];
     }
@@ -49,7 +49,7 @@ class GetLastOrdersResponse extends AbstractCurlResponse
      * 
      * @return int
      */
-    public function getPageSize()
+    public function getPageSize(): int
     {
         return (int) $this->data['pageSize'];
     }

@@ -33,11 +33,11 @@ class CardUnbindRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
-            'bindingId' => $this->bindingId
-        );
+        return [
+            'bindingId' => $this->bindingId,
+        ];
     }
 
     public function testData()

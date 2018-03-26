@@ -27,17 +27,17 @@ class CardBindRequestTest extends AbstractRequestTest
         
         parent::setUp();
     }
-    
+
     /**
      * Array of request parameters to successfully build request object
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
-            'bindingId' => $this->bindingId
-        );
+        return [
+            'bindingId' => $this->bindingId,
+        ];
     }
 
     public function testData()

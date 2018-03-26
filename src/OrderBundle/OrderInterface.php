@@ -7,21 +7,21 @@ interface OrderInterface
     /**
      * Order's cart.
      *
-     * @return OrderItemInterface[]
+     * @return iterable|\Omnipay\PaymentgateRu\OrderBundle\OrderItemInterface[]
      */
-    public function getItems();
+    public function getItems(): iterable;
 
     /**
      * Order's customer.
      *
      * @return CustomerInterface|null
      */
-    public function getCustomer();
+    public function getCustomer(): ?CustomerInterface;
 
     /**
      * Order's creation date as a timestamp.
      *
      * @return int|null
      */
-    public function getCreationDate();
+    public function getCreationDate(): ?int;
 }

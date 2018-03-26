@@ -2,9 +2,8 @@
 
 namespace Omnipay\PaymentgateRu\Message;
 
-use Guzzle\Http\ClientInterface;
-use Guzzle\Http\Exception\ServerErrorResponseException;
 use Omnipay\Common\Exception\RuntimeException;
+use Omnipay\Common\Http\Client;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\Common\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -23,24 +22,24 @@ abstract class AbstractCurlRequest extends AbstractRequest
      *
      * @return string
      */
-    abstract protected function getMethod();
+    abstract protected function getMethod(): string;
 
     /**
      * Response class name. Method will be ignored if class name passed to constructor third parameter
      *
      * @return string
      */
-    abstract public function getResponseClass();
+    abstract public function getResponseClass(): string;
 
     /**
      * Create a new Request
      *
-     * @param ClientInterface $httpClient A Guzzle client to make API calls with
+     * @param \Omnipay\Common\Http\Client $httpClient A Guzzle client to make API calls with
      * @param HttpRequest $httpRequest A Symfony HTTP request object
      * @param null|string Response class name (overrides getResponseClass method). Created for test purposes
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function __construct(ClientInterface $httpClient, HttpRequest $httpRequest, $responseClass = null)
+    public function __construct(Client $httpClient, HttpRequest $httpRequest, $responseClass = null)
     {
         parent::__construct($httpClient, $httpRequest);
 
@@ -57,7 +56,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
      *
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return (int) $this->getParameter('amount');
     }
@@ -65,9 +64,9 @@ abstract class AbstractCurlRequest extends AbstractRequest
     /**
      * Get gateway user name
      *
-     * @return string
+     * @return string|null
      */
-    public function getUserName()
+    public function getUserName(): ?string
     {
         return $this->getParameter('userName');
     }
@@ -76,10 +75,10 @@ abstract class AbstractCurlRequest extends AbstractRequest
      * Set gateway user name
      *
      * @param string $userName
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setUserName($userName)
+    public function setUserName($userName): self
     {
         return $this->setParameter('userName', $userName);
     }
@@ -87,9 +86,9 @@ abstract class AbstractCurlRequest extends AbstractRequest
     /**
      * Get gateway password
      *
-     * @return string
+     * @return string|null
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->getParameter('password');
     }
@@ -98,10 +97,10 @@ abstract class AbstractCurlRequest extends AbstractRequest
      * Set gateway password
      *
      * @param string $password
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setPassword($password)
+    public function setPassword($password): self
     {
         return $this->setParameter('password', $password);
     }
@@ -111,7 +110,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
      *
      * @return int|string
      */
-    public function getOrderNumber()
+    public function getOrderNumber(): ?string
     {
         return $this->getParameter('orderNumber');
     }
@@ -120,10 +119,10 @@ abstract class AbstractCurlRequest extends AbstractRequest
      * Set order number
      *
      * @param int|string $orderNumber
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setOrderNumber($orderNumber)
+    public function setOrderNumber($orderNumber): self
     {
         return $this->setParameter('orderNumber', $orderNumber);
     }
@@ -131,9 +130,9 @@ abstract class AbstractCurlRequest extends AbstractRequest
     /**
      * Get language (ISO 639-1)
      *
-     * @return string
+     * @return string|null
      */
-    public function getLanguage()
+    public function getLanguage(): ?string
     {
         return $this->getParameter('language');
     }
@@ -142,10 +141,10 @@ abstract class AbstractCurlRequest extends AbstractRequest
      * Set language (ISO 639-1)
      *
      * @param string $language
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setLanguage($language)
+    public function setLanguage($language): self
     {
         return $this->setParameter('language', $language);
     }
@@ -153,9 +152,9 @@ abstract class AbstractCurlRequest extends AbstractRequest
     /**
      * Get endpoint URL
      *
-     * @return string
+     * @return string|null
      */
-    public function getEndpoint()
+    public function getEndpoint(): ?string
     {
         return $this->getParameter('endpoint');
     }
@@ -164,10 +163,10 @@ abstract class AbstractCurlRequest extends AbstractRequest
      * Set endpoint URL
      *
      * @param string $endpoint
-     * @return $this
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setEndpoint($endpoint)
+    public function setEndpoint($endpoint): self
     {
         return $this->setParameter('endpoint', $endpoint);
     }
@@ -177,12 +176,12 @@ abstract class AbstractCurlRequest extends AbstractRequest
      *
      * @return array
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
-        return array(
+        return [
             'CMS' => 'Omnipay PaymentgateRu package',
-            'Module-Version' => '2.1.1'
-        );
+            'Module-Version' => '3.0.0'
+        ];
     }
 
     /**
@@ -190,30 +189,23 @@ abstract class AbstractCurlRequest extends AbstractRequest
      *
      * @param  mixed $data The data to send
      * @return ResponseInterface
-     * @throws \Guzzle\Http\Exception\RequestException
      */
-    public function sendData($data)
+    public function sendData($data): ResponseInterface
     {
         $url = $this->getEndpoint() . $this->getMethod();
 
-        $httpRequest = $this->httpClient
-            ->post($url)
-            ->addHeaders($this->getHeaders())
-            ->addPostFields(array_merge(array(
-                'userName' => $this->getUserName(),
-                'password' => $this->getPassword()
-            ), $data));
+        $httpResponse = $this->httpClient->post($url, $this->getHeaders(), array_merge([
+            'userName' => $this->getUserName(),
+            'password' => $this->getPassword(),
+        ], $data));
 
-        $httpRequest->getCurlOptions()
-            ->set(CURLOPT_SSLVERSION, 6);
+        $statusCode = $httpResponse->getStatusCode();
 
-        try {
-            $httpResponse = $httpRequest->send();
-        } catch (ServerErrorResponseException $e) {
-            $json = json_encode(array(
-                'errorCode' => $e->getCode(),
-                'errorMessage' => $e->getMessage()
-            ));
+        if ($statusCode !== 200) {
+            $json = json_encode([
+                'errorCode' => $statusCode,
+                'errorMessage' => 'Server error response',
+            ]);
 
             return new ServerErrorResponse($this, $json);
         }

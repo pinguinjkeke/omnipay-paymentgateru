@@ -17,19 +17,19 @@ interface CustomerInterface
      *
      * @return string
      */
-    public function getEmail();
+    public function getEmail(): ?string;
 
     /**
      * Customer's phone.
      *
      * @return string
      */
-    public function getPhone();
+    public function getPhone(): ?string;
 
     /**
      * Customer's another contact method.
      *
      * @return string
      */
-    public function getContact();
+    public function getContact(): ?string;
 }

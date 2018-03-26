@@ -21,19 +21,19 @@ class CardExtendBindingRequestTest extends AbstractRequestTest
         
         parent::setUp();
     }
-    
+
     /**
      * Array of request parameters to successfully build request object
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'bindingId' => $this->bindingId,
             'newExpiry' => '201612',
-            'language' => 'ru'
-        );
+            'language' => 'ru',
+        ];
     }
 
     public function testData()

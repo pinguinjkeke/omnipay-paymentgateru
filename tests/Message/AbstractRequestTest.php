@@ -38,7 +38,7 @@ abstract class AbstractRequestTest extends TestCase
      *
      * @return array
      */
-    abstract protected function getRequestParameters();
+    abstract protected function getRequestParameters(): array;
 
     /**
      * Get request class name
@@ -48,7 +48,7 @@ abstract class AbstractRequestTest extends TestCase
     protected function getRequestClassName()
     {
         // Remove last 4 symbols ("AbstractRequestTest" becomes "AbstractRequest" i.e.)
-        return substr(get_class($this), 0, -4);
+        return substr(\get_class($this), 0, -4);
     }
 
     /**
@@ -59,7 +59,7 @@ abstract class AbstractRequestTest extends TestCase
     protected function getResponseClassName()
     {
         // Remove last 11 symbols and add "Response" ("AbstractRequestTest" becomes "AbstractResponse" i.e.)
-        return substr(get_class($this), 0, -11) . 'Response';
+        return substr(\get_class($this), 0, -11) . 'Response';
     }
 
     /**

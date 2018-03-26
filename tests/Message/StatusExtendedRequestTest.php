@@ -11,19 +11,19 @@ class StatusExtendedRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'orderId' => 'c6268217-c51e-4ceb-b962-76eb6a91be17',
-            'language' => 'ru'
-        );
+            'language' => 'ru',
+        ];
     }
 
     public function testRequestThrowsExceptionIfNoOrderProvided()
     {
         try {
             $request = new StatusExtendedRequest($this->getHttpClient(), $this->getHttpRequest());
-            $request->initialize(array())->send();
+            $request->initialize([])->send();
         } catch (InvalidRequestException $e) {
             $this->assertEquals($e->getMessage(), 'No orderId or orderNumber provided');
         }
@@ -34,10 +34,10 @@ class StatusExtendedRequestTest extends AbstractRequestTest
         $this->setMockHttpResponse('StatusExtendedRequestSuccess.txt');
 
         $request = new StatusExtendedRequest($this->getHttpClient(), $this->getHttpRequest());
-        $response = $request->initialize(array(
+        $response = $request->initialize([
             'orderNumber' => 'package_4',
-            'language' => 'ru'
-        ))->send();
+            'language' => 'ru',
+        ])->send();
 
         $this->assertTrue($response->isSuccessful());
     }
@@ -90,7 +90,7 @@ class StatusExtendedRequestTest extends AbstractRequestTest
         $reflection = new \ReflectionClass($response);
         $method = $reflection->getMethod('getMerchantOrderParam');
         $method->setAccessible(true);
-        $this->assertNull($method->invokeArgs($response, array('unexistentparameterfromtheorder')));
+        $this->assertNull($method->invokeArgs($response, ['unexistentparameterfromtheorder']));
     }
 
     public function testSendFailure()

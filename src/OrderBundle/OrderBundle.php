@@ -33,18 +33,18 @@ class OrderBundle
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $array = array(
+        $array = [
             'orderCreationDate' => $this->order->getCreationDate(),
-            'cartItems' => array(),
-            'customerDetails' => $this->customerToArray() ?: array()
-        );
+            'cartItems' => [],
+            'customerDetails' => $this->customerToArray() ?: [],
+        ];
 
         if ($this->order instanceof OrderDeliverableInterface) {
-            $deliveryInfo = array();
+            $deliveryInfo = [];
 
-            foreach (array('deliveryType', 'country', 'city', 'postAddress') as $field) {
+            foreach (['deliveryType', 'country', 'city', 'postAddress'] as $field) {
                 $method = 'get' . ucfirst($field);
                 $deliveryInfo[$field] = $this->order->{$method}();
             }
@@ -54,7 +54,7 @@ class OrderBundle
             }
         }
 
-        $array['cartItems']['items'] = array_map(array($this, 'cartItemToArray'), $this->order->getItems());
+        $array['cartItems']['items'] = array_map([$this, 'cartItemToArray'], $this->order->getItems());
 
         $this->positionId = 1;
 
@@ -67,21 +67,21 @@ class OrderBundle
      * @param OrderItemInterface $cartItem
      * @return array
      */
-    protected function cartItemToArray(OrderItemInterface $cartItem)
+    protected function cartItemToArray(OrderItemInterface $cartItem): array
     {
-        $array = array(
+        $array = [
             'positionId' => $this->positionId,
             'name' => $cartItem->getName(),
-            'quantity' => array(
+            'quantity' => [
                 'value' => $cartItem->getQuantity(),
-                'measure' => $cartItem->getMeasure()
-            ),
+                'measure' => $cartItem->getMeasure(),
+            ],
             'itemAmount' => $cartItem->getAmount(),
             'itemCode' => $cartItem->getCode(),
             'itemPrice' => $cartItem->getPrice(),
             'itemDetails' => $cartItem->getDetailParams(),
-            'itemCurrency' => $cartItem->getCurrency()
-        );
+            'itemCurrency' => $cartItem->getCurrency(),
+        ];
 
         if ($discountValue = $cartItem->getDiscountValue()) {
             $array['discount']['discountValue'] = $discountValue;
@@ -89,10 +89,10 @@ class OrderBundle
         }
 
         if ($cartItem instanceof OrderItemTaxableInterface) {
-            $array['tax'] = array_filter(array(
+            $array['tax'] = array_filter([
                 'taxSum' => $cartItem->getTaxSum(),
-                'taxType' => $cartItem->getTaxType()
-            ));
+                'taxType' => $cartItem->getTaxType(),
+            ]);
         }
 
         $this->positionId++;
@@ -105,12 +105,12 @@ class OrderBundle
      *
      * @return array
      */
-    protected function customerToArray()
+    protected function customerToArray(): array
     {
         $customer = $this->order->getCustomer();
-        $array = array();
+        $array = [];
 
-        foreach (array('email', 'phone', 'contact') as $field) {
+        foreach (['email', 'phone', 'contact'] as $field) {
             $method = 'get' . ucfirst($field);
             $array[$field] = $customer->{$method}();
         }

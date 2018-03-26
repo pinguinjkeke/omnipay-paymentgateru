@@ -14,7 +14,7 @@ class Order implements OrderInterface, OrderDeliverableInterface
      *
      * @return string|null
      */
-    public function getDeliveryType()
+    public function getDeliveryType(): ?string
     {
         return 'DHL courier';
     }
@@ -24,7 +24,7 @@ class Order implements OrderInterface, OrderDeliverableInterface
      *
      * @return string
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return 'RU';
     }
@@ -34,7 +34,7 @@ class Order implements OrderInterface, OrderDeliverableInterface
      *
      * @return string
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return 'Волгоград';
     }
@@ -44,7 +44,7 @@ class Order implements OrderInterface, OrderDeliverableInterface
      *
      * @return string
      */
-    public function getPostAddress()
+    public function getPostAddress(): ?string
     {
         return 'ул. Пушкина, д. Колотушкина, 23';
     }
@@ -52,14 +52,14 @@ class Order implements OrderInterface, OrderDeliverableInterface
     /**
      * Order's cart.
      *
-     * @return OrderItemInterface[]
+     * @return iterable
      */
-    public function getItems()
+    public function getItems(): iterable
     {
-        return array(
+        return [
             new OrderItem(3200000, 'iPhone 6S 64Gb Space Gray', 2),
-            new OrderItem(1000000, 'Samsung Galaxy Note II White', 1)
-        );
+            new OrderItem(1000000, 'Samsung Galaxy Note II White', 1),
+        ];
     }
 
     /**
@@ -67,7 +67,7 @@ class Order implements OrderInterface, OrderDeliverableInterface
      *
      * @return CustomerInterface|null
      */
-    public function getCustomer()
+    public function getCustomer(): ?\Omnipay\PaymentgateRu\OrderBundle\CustomerInterface
     {
         return new Customer();
     }
@@ -77,7 +77,7 @@ class Order implements OrderInterface, OrderDeliverableInterface
      *
      * @return int|null
      */
-    public function getCreationDate()
+    public function getCreationDate(): ?int
     {
         return time();
     }

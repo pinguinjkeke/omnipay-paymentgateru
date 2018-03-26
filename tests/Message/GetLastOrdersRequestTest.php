@@ -17,17 +17,17 @@ class GetLastOrdersRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'language' => 'ru',
             'size' => 10,
             'from' => '20160101000000',
             'to' => '20161002000000',
             'transactionStates' => 'CREATED,APPROVED,DEPOSITED,DECLINED,REVERSED,REFUNDED',
             'merchants' => '',
-            'searchByCreatedDate' => 'false'
-        );
+            'searchByCreatedDate' => 'false',
+        ];
     }
 
     public function testData()
@@ -54,7 +54,7 @@ class GetLastOrdersRequestTest extends AbstractRequestTest
         try {
             $this->request->setSize(201);
         } catch (InvalidArgumentException $e) {
-            $this->assertEquals($e->getMessage(), 'Size mustn\'t be higher than 200');
+            $this->assertEquals($e->getMessage(), 'Size must not be higher than 200');
         }
     }
 

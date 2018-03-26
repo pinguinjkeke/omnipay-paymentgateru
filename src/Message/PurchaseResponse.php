@@ -12,15 +12,15 @@ class PurchaseResponse extends AbstractCurlResponse
      */
     protected function getDataValueOrNull($parameter)
     {
-        return array_key_exists($parameter, $this->data) ? $this->data[$parameter] : null;
+        return $this->data[$parameter] ?? null;
     }
-    
+
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->getCode() === 0;
     }
@@ -28,9 +28,9 @@ class PurchaseResponse extends AbstractCurlResponse
     /**
      * Does the response require a redirect?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isRedirect()
+    public function isRedirect(): bool
     {
         return array_key_exists('redirect', $this->data);
     }
@@ -40,7 +40,7 @@ class PurchaseResponse extends AbstractCurlResponse
      *
      * @return int A response code from the payment gateway
      */
-    public function getCode()
+    public function getCode(): int
     {
         return (int) $this->data['errorCode'];
     }
@@ -50,7 +50,7 @@ class PurchaseResponse extends AbstractCurlResponse
      * 
      * @return string|null
      */
-    public function getRedirectUrl()
+    public function getRedirectUrl(): ?string
     {
         return $this->getDataValueOrNull('redirect');
     }
@@ -60,7 +60,7 @@ class PurchaseResponse extends AbstractCurlResponse
      * 
      * @return string|null
      */
-    public function getInfo()
+    public function getInfo(): ?string
     {
         return $this->getDataValueOrNull('info');
     }
@@ -70,7 +70,7 @@ class PurchaseResponse extends AbstractCurlResponse
      * 
      * @return string|null
      */
-    public function getAcsUrl()
+    public function getAcsUrl(): ?string
     {
         return $this->getDataValueOrNull('acsUrl');
     }
@@ -80,7 +80,7 @@ class PurchaseResponse extends AbstractCurlResponse
      * 
      * @return string|null
      */
-    public function getPaReq()
+    public function getPaReq(): ?string
     {
         return $this->getDataValueOrNull('paReq');
     }
@@ -90,7 +90,7 @@ class PurchaseResponse extends AbstractCurlResponse
      * 
      * @return string|null
      */
-    public function getTermUrl()
+    public function getTermUrl(): ?string
     {
         return $this->getDataValueOrNull('termUrl');
     }

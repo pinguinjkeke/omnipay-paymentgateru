@@ -7,9 +7,9 @@ class RefundResponse extends AbstractCurlResponse
     /**
      * Is the response successful?
      *
-     * @return boolean
+     * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return $this->getCode() === 0;
     }
@@ -17,9 +17,9 @@ class RefundResponse extends AbstractCurlResponse
     /**
      * Response code
      *
-     * @return null|string A response code from the payment gateway
+     * @return int A response code from the payment gateway
      */
-    public function getCode()
+    public function getCode(): int
     {
         return (int) $this->data['errorCode'];
     }
@@ -29,7 +29,7 @@ class RefundResponse extends AbstractCurlResponse
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->data['errorMessage'];
     }

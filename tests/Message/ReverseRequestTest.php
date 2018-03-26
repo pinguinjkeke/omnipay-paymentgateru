@@ -9,12 +9,12 @@ class ReverseRequestTest extends AbstractRequestTest
      *
      * @return array
      */
-    protected function getRequestParameters()
+    protected function getRequestParameters(): array
     {
-        return array(
+        return [
             'orderId' => $this->orderNumber,
-            'language' => 'ru'
-        );
+            'language' => 'ru',
+        ];
     }
 
     public function testData()

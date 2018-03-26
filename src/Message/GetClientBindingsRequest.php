@@ -7,9 +7,9 @@ class GetClientBindingsRequest extends AbstractCurlRequest
     /**
      * Get client id
      * 
-     * @return int|string
+     * @return null|string
      */
-    public function getClientId()
+    public function getClientId(): ?string
     {
         return $this->getParameter('clientId');
     }
@@ -21,17 +21,17 @@ class GetClientBindingsRequest extends AbstractCurlRequest
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
-    public function setClientId($clientId)
+    public function setClientId($clientId): self
     {
         return $this->setParameter('clientId', $clientId);
     }
-    
+
     /**
      * Method name from bank API
      *
      * @return string
      */
-    protected function getMethod()
+    protected function getMethod(): string
     {
         return 'rest/getBindings.do';
     }
@@ -41,7 +41,7 @@ class GetClientBindingsRequest extends AbstractCurlRequest
      *
      * @return string
      */
-    public function getResponseClass()
+    public function getResponseClass(): string
     {
         return 'GetClientBindingsResponse';
     }
@@ -53,12 +53,12 @@ class GetClientBindingsRequest extends AbstractCurlRequest
      * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('clientId');
         
-        return array(
-            'clientId' => $this->getClientId()
-        );
+        return [
+            'clientId' => $this->getClientId(),
+        ];
     }
 }

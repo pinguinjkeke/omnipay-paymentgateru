@@ -6,7 +6,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 {
     /**
      * Get value from merchantOrderParams key-value array
-     * 
+     *
      * @param string $parameter
      * @return null|string
      */
@@ -156,7 +156,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * User's operation system
-     * 
+     *
      * @return null|string
      */
     public function getOs(): ?string
@@ -166,7 +166,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Client's browser
-     * 
+     *
      * @return null|string
      */
     public function getBrowserName(): ?string
@@ -176,7 +176,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Client's browser version
-     * 
+     *
      * @return null|string
      */
     public function getBrowserVersion(): ?string
@@ -186,7 +186,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Client's browser language
-     * 
+     *
      * @return null|string
      */
     public function getBrowserLanguage(): ?string
@@ -196,7 +196,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Client's user agent
-     * 
+     *
      * @return null|string
      */
     public function getUserAgent(): ?string
@@ -206,7 +206,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Card expiration date
-     * 
+     *
      * @return string
      */
     public function getCardExpiration(): ?string
@@ -216,7 +216,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Card holder
-     * 
+     *
      * @return string
      */
     public function getCardHolder(): ?string
@@ -226,7 +226,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Card number
-     * 
+     *
      * @return string
      */
     public function getCardPan(): ?string
@@ -236,7 +236,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Bank name
-     * 
+     *
      * @return string
      */
     public function getBankName(): ?string
@@ -246,7 +246,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Bank country code
-     * 
+     *
      * @return string
      */
     public function getBankCountryCode(): ?string
@@ -256,7 +256,7 @@ class StatusExtendedResponse extends AbstractCurlResponse
 
     /**
      * Bank country name
-     * 
+     *
      * @return string
      */
     public function getBankCountryName(): ?string

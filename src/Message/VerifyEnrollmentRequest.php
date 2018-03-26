@@ -6,7 +6,7 @@ class VerifyEnrollmentRequest extends AbstractCurlRequest
 {
     /**
      * Get pan (credit card number)
-     * 
+     *
      * @return string
      */
     public function getPan(): ?string

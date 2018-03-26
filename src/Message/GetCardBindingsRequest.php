@@ -8,7 +8,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
 {
     /**
      * Get card pan
-     * 
+     *
      * @return string
      */
     public function getPan(): ?string
@@ -30,7 +30,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
 
     /**
      * Get binding id
-     * 
+     *
      * @return string
      */
     public function getBindingId(): ?string
@@ -52,7 +52,7 @@ class GetCardBindingsRequest extends AbstractCurlRequest
 
     /**
      * Get show expired bindings
-     * 
+     *
      * @return string
      */
     public function getShowExpired(): ?string

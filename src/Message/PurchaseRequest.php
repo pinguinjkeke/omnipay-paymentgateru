@@ -6,7 +6,7 @@ class PurchaseRequest extends AbstractCurlRequest
 {
     /**
      * Get order number
-     * 
+     *
      * @return string|null
      */
     public function getMdOrder(): ?string
@@ -28,7 +28,7 @@ class PurchaseRequest extends AbstractCurlRequest
 
     /**
      * Get binding id
-     * 
+     *
      * @return string
      */
     public function getBindingId(): ?string
@@ -50,7 +50,7 @@ class PurchaseRequest extends AbstractCurlRequest
 
     /**
      * Get client's IP-address
-     * 
+     *
      * @return string
      */
     public function getIp(): ?string
@@ -72,7 +72,7 @@ class PurchaseRequest extends AbstractCurlRequest
 
     /**
      * Get CVC code (if needed)
-     * 
+     *
      * @return int
      */
     public function getCvc(): ?int
@@ -94,7 +94,7 @@ class PurchaseRequest extends AbstractCurlRequest
 
     /**
      * Get user's email address
-     * 
+     *
      * @return string
      */
     public function getEmail(): ?string

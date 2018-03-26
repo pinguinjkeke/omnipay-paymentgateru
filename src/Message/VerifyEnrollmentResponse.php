@@ -36,7 +36,7 @@ class VerifyEnrollmentResponse extends AbstractCurlResponse
 
     /**
      * Is card enrolled to 3DS?
-     * 
+     *
      * @return bool
      */
     public function getEnrolled(): bool
@@ -46,7 +46,7 @@ class VerifyEnrollmentResponse extends AbstractCurlResponse
 
     /**
      * Emitter bank name
-     * 
+     *
      * @return string
      */
     public function getEmitterName(): ?string

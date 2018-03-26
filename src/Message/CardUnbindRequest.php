@@ -6,7 +6,7 @@ class CardUnbindRequest extends AbstractCurlRequest
 {
     /**
      * Get binding id
-     * 
+     *
      * @return string|null
      */
     public function getBindingId(): ?string

@@ -26,7 +26,7 @@ class GetLastOrdersResponse extends AbstractCurlResponse
 
     /**
      * Count of rows
-     * 
+     *
      * @return int
      */
     public function getTotalCount(): int
@@ -36,7 +36,7 @@ class GetLastOrdersResponse extends AbstractCurlResponse
 
     /**
      * Current page
-     * 
+     *
      * @return int
      */
     public function getPage(): int
@@ -46,7 +46,7 @@ class GetLastOrdersResponse extends AbstractCurlResponse
 
     /**
      * Page size
-     * 
+     *
      * @return int
      */
     public function getPageSize(): int

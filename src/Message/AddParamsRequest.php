@@ -28,7 +28,7 @@ class AddParamsRequest extends AbstractCurlRequest
 
     /**
      * Get order additional parameters
-     * 
+     *
      * @return array
      */
     public function getParams(): array

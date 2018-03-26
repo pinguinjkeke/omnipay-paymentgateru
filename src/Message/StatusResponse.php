@@ -46,7 +46,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Your application's order id
-     * 
+     *
      * @return mixed
      */
     public function getOrderNumber()
@@ -56,7 +56,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Masked card number (only when order paid)
-     * 
+     *
      * @return string
      */
     public function getCardPan(): ?string
@@ -66,7 +66,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Card expiration date (only when order paid)
-     * 
+     *
      * @return string
      */
     public function getCardExpiration(): ?string
@@ -76,7 +76,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Card holder (only when order paid)
-     * 
+     *
      * @return string
      */
     public function getCardHolder(): ?string
@@ -86,7 +86,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Order sum
-     * 
+     *
      * @return int
      */
     public function getAmount(): int
@@ -96,7 +96,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Order currency in ISO 4217 format
-     * 
+     *
      * @return int
      */
     public function getCurrency(): int
@@ -106,7 +106,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Approval code
-     * 
+     *
      * @return string
      */
     public function getApprovalCode(): ?string
@@ -116,7 +116,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Client's IP-address
-     * 
+     *
      * @return string
      */
     public function getIp(): ?string
@@ -126,7 +126,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Order creation date
-     * 
+     *
      * @return string
      */
     public function getDate(): ?string
@@ -136,7 +136,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Client id (if used)
-     * 
+     *
      * @return string
      */
     public function getClientId(): ?string
@@ -146,7 +146,7 @@ class StatusResponse extends AbstractCurlResponse
 
     /**
      * Binding id (if used)
-     * 
+     *
      * @return string
      */
     public function getBindingId(): ?string

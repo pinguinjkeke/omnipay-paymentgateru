@@ -79,7 +79,7 @@ class Gateway extends AbstractGateway
      *     'testMode' => false, // boolean variable
      *     'landingPage' => ['billing', 'login'], // enum variable, first item is default
      * ];
-     * 
+     *
      * @return array
      */
     public function getDefaultParameters(): array
@@ -202,7 +202,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Does gateway supports status?
-     * 
+     *
      * @return bool
      */
     public function supportsStatus(): bool
@@ -242,7 +242,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Does gateway supports order params adding?
-     * 
+     *
      * @return bool
      */
     public function supportsAddParams(): bool
@@ -262,7 +262,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Does gateway supports card binding?
-     * 
+     *
      * @return bool
      */
     public function supportsCardBind(): bool
@@ -272,7 +272,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Does gateway supports card unbinding?
-     * 
+     *
      * @return bool
      */
     public function supportsCardUnbind(): bool
@@ -292,7 +292,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Does gateway supports client's card bindings list?
-     * 
+     *
      * @return bool
      */
     public function supportsGetClientBindings(): bool
@@ -302,7 +302,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Does gateway supports cards bindings list?
-     * 
+     *
      * @return bool
      */
     public function supportsGetCardBindings(): bool
@@ -312,7 +312,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Authorize request
-     * 
+     *
      * @param array $options
      * @return Message\AuthorizeRequest
      */
@@ -378,7 +378,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Verify card 3DS enrollment
-     * 
+     *
      * @param array $options
      * @return Message\VerifyEnrollmentRequest
      */
@@ -389,7 +389,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Add order parameters
-     * 
+     *
      * @param array $options
      * @return Message\AddParamsRequest
      */
@@ -400,7 +400,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Get last orders list
-     * 
+     *
      * @param array $options
      * @return Message\GetLastOrdersRequest
      */
@@ -411,7 +411,7 @@ class Gateway extends AbstractGateway
 
     /**
      * Purchase request
-     * 
+     *
      * @param array $options
      * @return Message\PurchaseRequest
      */

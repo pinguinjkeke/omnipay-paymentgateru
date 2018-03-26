@@ -6,7 +6,7 @@ class GetClientBindingsRequest extends AbstractCurlRequest
 {
     /**
      * Get client id
-     * 
+     *
      * @return null|string
      */
     public function getClientId(): ?string

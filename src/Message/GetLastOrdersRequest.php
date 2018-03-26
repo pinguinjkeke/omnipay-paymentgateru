@@ -8,7 +8,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
 {
     /**
      * Page number
-     * 
+     *
      * @return int
      */
     public function getPage(): int
@@ -18,7 +18,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
 
     /**
      * Set page number
-     * 
+     *
      * @param int $page
      * @return $this
      * @throws \Omnipay\Common\Exception\RuntimeException
@@ -30,7 +30,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
     
     /**
      * Get page size
-     * 
+     *
      * @return int|null
      */
     public function getSize(): ?int
@@ -57,7 +57,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
 
     /**
      * Get start of selection (YYYYMMDDHHmmss format)
-     * 
+     *
      * @return string|null
      */
     public function getFrom(): ?string
@@ -79,7 +79,7 @@ class GetLastOrdersRequest extends AbstractCurlRequest
 
     /**
      * Get end of selection (YYYYDDHHmmss format)
-     * 
+     *
      * @return string
      */
     public function getTo(): ?string

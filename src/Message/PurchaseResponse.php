@@ -47,7 +47,7 @@ class PurchaseResponse extends AbstractCurlResponse
 
     /**
      * Redirect url
-     * 
+     *
      * @return string|null
      */
     public function getRedirectUrl(): ?string
@@ -57,7 +57,7 @@ class PurchaseResponse extends AbstractCurlResponse
 
     /**
      * Payment info
-     * 
+     *
      * @return string|null
      */
     public function getInfo(): ?string
@@ -67,7 +67,7 @@ class PurchaseResponse extends AbstractCurlResponse
 
     /**
      * 3DS url
-     * 
+     *
      * @return string|null
      */
     public function getAcsUrl(): ?string
@@ -77,7 +77,7 @@ class PurchaseResponse extends AbstractCurlResponse
 
     /**
      * 3DS payment authentication request
-     * 
+     *
      * @return string|null
      */
     public function getPaReq(): ?string
@@ -87,7 +87,7 @@ class PurchaseResponse extends AbstractCurlResponse
 
     /**
      * 3DS back-url
-     * 
+     *
      * @return string|null
      */
     public function getTermUrl(): ?string

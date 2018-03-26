@@ -193,11 +193,13 @@ abstract class AbstractCurlRequest extends AbstractRequest
     public function sendData($data): ResponseInterface
     {
         $url = $this->getEndpoint() . $this->getMethod();
-
-        $httpResponse = $this->httpClient->post($url, $this->getHeaders(), array_merge([
+        $data = array_merge([
             'userName' => $this->getUserName(),
             'password' => $this->getPassword(),
-        ], $data));
+        ], $data);
+        $query = http_build_query($data, '', '&');
+
+        $httpResponse = $this->httpClient->get("{$url}?{$query}", $this->getHeaders());
 
         $statusCode = $httpResponse->getStatusCode();
 

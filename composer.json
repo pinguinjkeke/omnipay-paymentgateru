@@ -1,6 +1,6 @@
 {
   "name": "pinguinjkeke/omnipay-paymentgateru",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "type": "library",
   "description": "Paymentgate.ru support for Omnipay payment processing library",
   "keywords": [
@@ -34,6 +34,7 @@
     }
   },
   "require": {
+    "php": ">=7.1.0",
     "omnipay/common": "^v3.0-alpha.2"
   },
   "require-dev": {

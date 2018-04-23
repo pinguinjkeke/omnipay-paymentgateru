@@ -180,7 +180,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
     {
         return [
             'CMS' => 'Omnipay PaymentgateRu package',
-            'Module-Version' => '3.0.0'
+            'Module-Version' => '3.0.0',
         ];
     }
 
@@ -189,17 +189,19 @@ abstract class AbstractCurlRequest extends AbstractRequest
      *
      * @param  mixed $data The data to send
      * @return ResponseInterface
+     * @throws \Psr\Http\Client\Exception\RequestException
+     * @throws \Psr\Http\Client\Exception\NetworkException
      */
     public function sendData($data): ResponseInterface
     {
-        $url = $this->getEndpoint() . $this->getMethod();
+        $url = "{$this->getEndpoint()}{$this->getMethod()}";
         $data = array_merge([
             'userName' => $this->getUserName(),
             'password' => $this->getPassword(),
         ], $data);
-        $query = http_build_query($data, '', '&');
+        $data = http_build_query($data);
 
-        $httpResponse = $this->httpClient->get("{$url}?{$query}", $this->getHeaders());
+        $httpResponse = $this->httpClient->request('POST', "{$url}?{$data}", $this->getHeaders());
 
         $statusCode = $httpResponse->getStatusCode();
 
@@ -212,6 +214,6 @@ abstract class AbstractCurlRequest extends AbstractRequest
             return new ServerErrorResponse($this, $json);
         }
 
-        return new $this->responseClass($this, $httpResponse->getBody(true));
+        return new $this->responseClass($this, $httpResponse->getBody());
     }
 }

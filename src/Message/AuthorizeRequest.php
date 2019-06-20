@@ -237,6 +237,28 @@ class AuthorizeRequest extends AbstractCurlRequest
     {
         return $this->setParameter('taxSystem', $taxSystem);
     }
+    
+    /**
+     * Used json params
+     *
+     * @return null|string
+     */
+    public function getJsonParams(): ?string
+    {
+        return $this->getParameter('jsonParams');
+    }
+
+    /**
+     * Set json params
+     *
+     * @param $taxSystem
+     * @return \Omnipay\Common\Message\AbstractRequest|$this
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setJsonParams($jsonParams): self
+    {
+        return $this->setParameter('jsonParams', $jsonParams);
+    }
 
     /**
      * Method name from bank API
@@ -300,7 +322,7 @@ class AuthorizeRequest extends AbstractCurlRequest
 
         $extraParameters = [
             'currency', 'description', 'language', 'pageView', 'sessionTimeoutSecs', 'features',
-            'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin', 'taxSystem',
+            'bindingId', 'expirationDate', 'failUrl', 'clientId', 'merchantLogin', 'taxSystem', 'jsonParams',
         ];
 
         foreach ($extraParameters as $parameter) {

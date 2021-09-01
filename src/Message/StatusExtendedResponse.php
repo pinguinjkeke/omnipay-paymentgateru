@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\Message;
+namespace Omnipay\RbsUat\Message;
 
 class StatusExtendedResponse extends AbstractCurlResponse
 {

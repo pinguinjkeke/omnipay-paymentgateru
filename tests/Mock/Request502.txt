@@ -1,9 +1,0 @@
-HTTP/1.1 502 Bad Gateway
-Server: nginx/1.8.1
-Date: Mon, 03 Oct 2016 16:47:15 GMT
-Content-Type: text/plain;charset=UTF-8
-Transfer-Encoding: chunked
-Connection: keep-alive
-Expires: Mon, 03 Oct 2016 16:47:14 GMT
-Cache-Control: no-cache
-Access-Control-Allow-Origin: https://playground.paymentgate.ru

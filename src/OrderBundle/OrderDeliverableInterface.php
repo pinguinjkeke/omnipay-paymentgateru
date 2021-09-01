@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\OrderBundle;
+namespace Omnipay\RbsUat\OrderBundle;
 
 /**
  * Interface CustomerDeliverableInterface.
@@ -8,7 +8,7 @@ namespace Omnipay\PaymentgateRu\OrderBundle;
  *
  * @author Alexander Avakov (pinguinjkeke)
  * @company Meshgroup
- * @package Omnipay\PaymentgateRu
+ * @package Omnipay\RbsUat
  */
 interface OrderDeliverableInterface
 {

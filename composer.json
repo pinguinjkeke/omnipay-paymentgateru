@@ -1,11 +1,11 @@
 {
-  "name": "pinguinjkeke/omnipay-paymentgateru",
+  "name": "sevakode/omnipay-rbsuat",
   "version": "3.0.1",
   "type": "library",
-  "description": "Paymentgate.ru support for Omnipay payment processing library",
+  "description": "rbsuat support for Omnipay payment processing library",
   "keywords": [
-    "alphabank",
-    "paymentgateru",
+    "mts",
+    "rbsuat",
     "paymentgate",
     "gateway",
     "merchant",
@@ -15,17 +15,16 @@
     "purchase",
     "soap"
   ],
-  "homepage": "https://github.com/pinguinjkeke/omnipay-paymentgateru",
   "license": "MIT",
   "authors": [
     {
-      "name": "Alexander Avakov",
-      "email": "yaavakov@gmail.com"
+      "name": "Sevak Petrosyan",
+      "email": "sevakode@gmail.com"
     }
   ],
   "autoload": {
     "psr-4": {
-      "Omnipay\\PaymentgateRu\\": "src/"
+      "Omnipay\\RbsUat\\": "src/"
     }
   },
   "autoload-dev": {

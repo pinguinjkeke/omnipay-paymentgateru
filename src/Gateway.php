@@ -1,37 +1,36 @@
 <?php
 
-namespace Omnipay\PaymentgateRu;
+namespace Omnipay\RbsUat;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\PaymentgateRu\Message\AddParamsRequest;
-use Omnipay\PaymentgateRu\Message\AuthorizeRequest;
-use Omnipay\PaymentgateRu\Message\CardBindRequest;
-use Omnipay\PaymentgateRu\Message\CardExtendBindingRequest;
-use Omnipay\PaymentgateRu\Message\CardUnbindRequest;
-use Omnipay\PaymentgateRu\Message\DepositRequest;
-use Omnipay\PaymentgateRu\Message\GetCardBindingsRequest;
-use Omnipay\PaymentgateRu\Message\GetClientBindingsRequest;
-use Omnipay\PaymentgateRu\Message\GetLastOrdersRequest;
-use Omnipay\PaymentgateRu\Message\PaymentRequest;
-use Omnipay\PaymentgateRu\Message\PurchaseRequest;
-use Omnipay\PaymentgateRu\Message\RefundRequest;
-use Omnipay\PaymentgateRu\Message\ReverseRequest;
-use Omnipay\PaymentgateRu\Message\StatusExtendedRequest;
-use Omnipay\PaymentgateRu\Message\StatusRequest;
-use Omnipay\PaymentgateRu\Message\VerifyEnrollmentRequest;
+use Omnipay\RbsUat\Message\AddParamsRequest;
+use Omnipay\RbsUat\Message\AuthorizeRequest;
+use Omnipay\RbsUat\Message\CardBindRequest;
+use Omnipay\RbsUat\Message\CardExtendBindingRequest;
+use Omnipay\RbsUat\Message\CardUnbindRequest;
+use Omnipay\RbsUat\Message\DepositRequest;
+use Omnipay\RbsUat\Message\GetCardBindingsRequest;
+use Omnipay\RbsUat\Message\GetClientBindingsRequest;
+use Omnipay\RbsUat\Message\GetLastOrdersRequest;
+use Omnipay\RbsUat\Message\PaymentRequest;
+use Omnipay\RbsUat\Message\PurchaseRequest;
+use Omnipay\RbsUat\Message\RefundRequest;
+use Omnipay\RbsUat\Message\ReverseRequest;
+use Omnipay\RbsUat\Message\StatusExtendedRequest;
+use Omnipay\RbsUat\Message\StatusRequest;
+use Omnipay\RbsUat\Message\VerifyEnrollmentRequest;
 
 /**
  * Class Gateway.
  *
- * Works with Paymentgate.ru gateway.
+ * Works with RbsUat gateway.
  * Supports test mode.
  * Implemented all methods from provided pdf instead of adding a card to SSL list
  * and payment through external payment system
  *
- * @author Alexander Avakov (pinguinjkeke)
- * @company Meshgroup
- * @package Omnipay\PaymentgateRu
- * @link https://pay.alfabank.ru/ecommerce/instructions/Merchant%20Manual%20(RU).pdf
+ * @author  Sevak Petrosyan (sevakode)
+ * @company GOST
+ * @package Omnipay\RbsUat
  */
 class Gateway extends AbstractGateway
 {
@@ -40,7 +39,7 @@ class Gateway extends AbstractGateway
      *
      * @var string
      */
-    public const TEST_URL = 'https://web.rbsuat.com/ab/';
+    public const TEST_URL = 'https://web.rbsuat.com/mtsbank/';
 
     /**
      * Production gateway url
@@ -52,7 +51,6 @@ class Gateway extends AbstractGateway
     /**
      * Tax system constants
      *
-     * @link https://pay.alfabank.ru/ecommerce/instructions/Connecting%20to%20the%20Fiscalization%20Service.pdf
      */
     public const TAX_SYSTEM_COMMON = 0;
     public const TAX_SYSTEM_SIMPLIFIED_INCOME = 1;
@@ -68,7 +66,7 @@ class Gateway extends AbstractGateway
      */
     public function getName(): string
     {
-        return 'PaymentgateRu';
+        return 'RbsUat';
     }
 
     /**
@@ -427,6 +425,16 @@ class Gateway extends AbstractGateway
      * @return Message\PaymentRequest
      */
     public function applePay(array $options = []): PaymentRequest
+    {
+        return $this->createRequest(PaymentRequest::class, $options);
+    }
+    /**
+     * GooglePay Payment request
+     *
+     * @param array $options
+     * @return Message\PaymentRequest
+     */
+    public function googlePay(array $options = []): PaymentRequest
     {
         return $this->createRequest(PaymentRequest::class, $options);
     }

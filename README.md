@@ -1,22 +1,22 @@
-# Omnipay: PaymentgateRu (Alfabank)
+# Omnipay: RbsUat (MTS)
 
-**PaymentgateRu (Альфабанк) драйвер для библиотеки Omnipay PHP**
+**RbsUat (МТС) драйвер для библиотеки Omnipay PHP**
 
-[![Build Status](https://api.travis-ci.org/pinguinjkeke/omnipay-paymentgateru.svg)](https://travis-ci.org/pinguinjkeke/omnipay-paymentgateru)
-[![Latest Stable Version](https://poser.pugx.org/pinguinjkeke/omnipay-paymentgateru/version.png)](https://packagist.org/packages/pinguinjkeke/omnipay-paymentgateru)
-[![Total Downloads](https://poser.pugx.org/pinguinjkeke/omnipay-paymentgateru/d/total.png)](https://packagist.org/packages/pinguinjkeke/omnipay-paymentgateru)
+[![Build Status](https://api.travis-ci.org/pinguinjkeke/omnipay-RbsUat.svg)](https://travis-ci.org/pinguinjkeke/omnipay-RbsUat)
+[![Latest Stable Version](https://poser.pugx.org/pinguinjkeke/omnipay-RbsUat/version.png)](https://packagist.org/packages/pinguinjkeke/omnipay-RbsUat)
+[![Total Downloads](https://poser.pugx.org/pinguinjkeke/omnipay-RbsUat/d/total.png)](https://packagist.org/packages/pinguinjkeke/omnipay-RbsUat)
 
 [Omnipay](https://github.com/thephpleague/omnipay) - это независимая от фреймворков библиотека для PHP 5.3+,
 поддерживающая работу с несколькими шлюзами.
 
-Данный пакет добавляет поддержку для платежного шлюза Альфабанка paymentgate.ru.
+Данный пакет добавляет поддержку для платежного шлюза МТС rbsuat
 
 ## Установка
 
 Лучший способ - установка через [Composer](http://getcomposer.org/). Просто добавьте в ваш `composer.json`:
 
 ```
-composer require "pinguinjkeke/omnipay-paymentgateru"
+composer require "pinguinjkeke/omnipay-RbsUat"
 ```
 Для PHP 5.3 - 7.0 используйте версии 2.*
 
@@ -67,7 +67,7 @@ $success = $response->isSuccess();
 ## Подготовка к ФЗ-54
 Пакет реализует последние имзенения и поддерживает работу с онлайн-кассами по ФЗ-54.
 
-Класс заказа в вашей системе должен реализовывать интерфейс ```Omnipay\PaymentgateRu\OrderBundle\OrderInterface```
+Класс заказа в вашей системе должен реализовывать интерфейс ```Omnipay\RbsUat\OrderBundle\OrderInterface```
 ```php
 class Order extends EloquentModel implements OrderInterface
 {
@@ -89,7 +89,7 @@ class Order extends EloquentModel implements OrderInterface
     }
 }
 ```
-Для работы с функционалом доставки, заказ должен реализовывать интерфейс ```Omnipay\PaymentgateRu\OrderBundle\OrderDeliverableInterface```.
+Для работы с функционалом доставки, заказ должен реализовывать интерфейс ```Omnipay\RbsUat\OrderBundle\OrderDeliverableInterface```.
 ```php
 class Order extends EloquentModel implements OrderInterface, OrderDeliverableInterface
 {
@@ -118,7 +118,7 @@ class Order extends EloquentModel implements OrderInterface, OrderDeliverableInt
     }
 }
 ```
-Метод заказа ```getCustomer()``` должен возвращать null, если функционал не используется или ```Omnipay\PaymentgateRu\OrderBundle\CustomerInterface```.
+Метод заказа ```getCustomer()``` должен возвращать null, если функционал не используется или ```Omnipay\RbsUat\OrderBundle\CustomerInterface```.
 ```php
 class User extends EloquentModel implements CustomerInterface
 {
@@ -211,7 +211,7 @@ class CartProduct extends EloquentModel implements OrderItemInterface
 Если в рамках вашей системы возможно использование нескольких систем налогообложения для разных товаров
 , то взгляните на интерфейс ```OrderItemTaxableInterface```.
 
-К методу авторизации заказа в банке необходимо прикрепить ```Omnipay\PaymentgateRu\OrderBundle\OrderBundle```
+К методу авторизации заказа в банке необходимо прикрепить ```Omnipay\RbsUat\OrderBundle\OrderBundle```
 и в качестве аргумента конструктора передать ваш заказ ```OrderInterface```
 ```php
 $orderBundle = new OrderBundle(
@@ -234,10 +234,3 @@ $response = Gateway::authorize([
     ->setOrderBundle($orderBundle)  // Необходимо прикрепить OrderBundle к заказу
     ->send();
 ```
-
-
-## Поддержка
-
-Я стараюсь поддерживать пакет по мере обновления документации pyamentgate.
-
-Если вы нашли какие-то проблемы я с радостью рассмотрю issue или приму pull request.

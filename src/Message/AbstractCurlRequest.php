@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\Message;
+namespace Omnipay\RbsUat\Message;
 
 use Omnipay\Common\Exception\RuntimeException;
 use Omnipay\Common\Http\Client;
@@ -43,7 +43,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
     {
         parent::__construct($httpClient, $httpRequest);
 
-        $this->responseClass = '\\Omnipay\\PaymentgateRu\\Message\\' . ($responseClass ?: $this->getResponseClass());
+        $this->responseClass = '\\Omnipay\\RbsUat\\Message\\' . ($responseClass ?: $this->getResponseClass());
 
         if (!class_exists($this->responseClass)) {
             throw new RuntimeException("Response class \"{$this->responseClass}\" not exists");
@@ -52,7 +52,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
 
     /**
      * Validates and returns the formatted amount.
-     * Paymentgate requires to send amount in kopeck instead of just rubles
+     * RbsUat requires to send amount in kopeck instead of just rubles
      *
      * @return int
      */
@@ -179,7 +179,7 @@ abstract class AbstractCurlRequest extends AbstractRequest
     public function getHeaders(): array
     {
         return [
-            'CMS' => 'Omnipay PaymentgateRu package',
+            'CMS' => 'Omnipay RbsUat package',
             'Module-Version' => '3.0.0',
         ];
     }

@@ -2,7 +2,7 @@
 
 namespace Omnipay\RbsUat\Message;
 
-class PaymentResponse extends AbstractCurlResponse
+class GooglePaymentResponse extends AbstractCurlResponse
 {
     /**
      * Is the response successful?

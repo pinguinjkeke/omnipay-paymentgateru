@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\Message;
+namespace Omnipay\RbsUat\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;

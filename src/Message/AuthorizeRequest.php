@@ -1,8 +1,8 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\Message;
+namespace Omnipay\RbsUat\Message;
 
-use Omnipay\PaymentgateRu\OrderBundle\OrderBundle;
+use Omnipay\RbsUat\OrderBundle\OrderBundle;
 
 class AuthorizeRequest extends AbstractCurlRequest
 {

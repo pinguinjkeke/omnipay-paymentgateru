@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\OrderBundle;
+namespace Omnipay\RbsUat\OrderBundle;
 
 interface OrderItemTaxableInterface
 {

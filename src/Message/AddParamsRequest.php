@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\Message;
+namespace Omnipay\RbsUat\Message;
 
 class AddParamsRequest extends AbstractCurlRequest
 {
@@ -40,7 +40,7 @@ class AddParamsRequest extends AbstractCurlRequest
      * Set order additional parameters
      *
      * @param array $params
-     * @return \Omnipay\Common\Message\AbstractRequest|\Omnipay\PaymentgateRu\Message\AddParamsRequest
+     * @return \Omnipay\Common\Message\AbstractRequest|\Omnipay\RbsUat\Message\AddParamsRequest
      * @throws \Omnipay\Common\Exception\RuntimeException
      */
     public function setParams($params): self

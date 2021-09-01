@@ -1,13 +1,13 @@
 <?php
 
-namespace Omnipay\PaymentgateRu\OrderBundle;
+namespace Omnipay\RbsUat\OrderBundle;
 
 interface OrderInterface
 {
     /**
      * Order's cart.
      *
-     * @return iterable|\Omnipay\PaymentgateRu\OrderBundle\OrderItemInterface[]
+     * @return iterable|\Omnipay\RbsUat\OrderBundle\OrderItemInterface[]
      */
     public function getItems(): iterable;
 

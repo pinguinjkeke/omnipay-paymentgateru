@@ -4,7 +4,7 @@ namespace Omnipay\RbsUat\Message;
 
 use Omnipay\Common\Message\ResponseInterface;
 
-class PaymentRequest extends AbstractCurlRequest
+class GooglePaymentRequest extends AbstractCurlRequest
 {
     /**
      * Method name from bank API
@@ -13,7 +13,7 @@ class PaymentRequest extends AbstractCurlRequest
      */
     protected function getMethod(): string
     {
-        return 'applepay/payment.do';
+        return 'google/payment.do';
     }
 
     /**
@@ -23,7 +23,7 @@ class PaymentRequest extends AbstractCurlRequest
      */
     public function getResponseClass(): string
     {
-        return 'PaymentResponse';
+        return 'GooglePaymentResponse';
     }
 
     /**
@@ -133,7 +133,28 @@ class PaymentRequest extends AbstractCurlRequest
      */
     public function setPreAuth($preAuth): self
     {
-        return $this->setParameter('preAuth', (bool) $preAuth);
+        return $this->setParameter('preAuth', (bool)$preAuth);
+    }
+    /**
+     * Is protocolVersion
+     *
+     * @return bool|null
+     */
+    public function getProtocolVersion(): string
+    {
+        return $this->getParameter('protocolVersion') ?: 'ECv2' ;
+    }
+
+    /**
+     * Set is protocolVersion.
+     *
+     * @param bool $protocolVersion
+     * @return $this
+     * @throws \Omnipay\Common\Exception\RuntimeException
+     */
+    public function setProtocolVersion($protocolVersion): self
+    {
+        return $this->setParameter('protocolVersion', $protocolVersion);
     }
 
     /**
@@ -172,7 +193,7 @@ class PaymentRequest extends AbstractCurlRequest
             'paymentToken' => \base64_encode($paymentToken),
         ];
 
-        foreach (['description', 'language', 'additionalParameters', 'clientId', 'preAuth'] as $parameter) {
+        foreach (['description', 'language', 'additionalParameters', 'clientId', 'preAuth', 'protocolVersion'] as $parameter) {
             $method = 'get' . ucfirst($parameter);
 
             if (method_exists($this, $method)) {
@@ -190,13 +211,14 @@ class PaymentRequest extends AbstractCurlRequest
     /**
      * Send the request with specified data
      *
-     * @param  mixed $data The data to send
+     * @param mixed $data The data to send
      * @return ResponseInterface
      * @throws \Psr\Http\Client\Exception\RequestException
      * @throws \Psr\Http\Client\Exception\NetworkException
      */
     public function sendData($data): ResponseInterface
     {
+        $this->setProtocolVersion('ECv2');
         $url = $this->getEndpoint() . $this->getMethod();
 
         $httpResponse = $this->httpClient->request('POST', $url, $this->getHeaders(), \json_encode($data));

@@ -47,7 +47,7 @@ class Gateway extends AbstractGateway
      *
      * @var string
      */
-    public const PRODUCTION_URL = 'https://engine.paymentgate.ru/payment/';
+    public const PRODUCTION_URL = 'https://pay.alfabank.ru/payment/';
 
     /**
      * Tax system constants
